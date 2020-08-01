@@ -9,39 +9,51 @@ import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.network.play.client.CPacketChatMessage;
 
+import java.util.ArrayList;
+
 public class ChatSuffix extends Module {
     public ChatSuffix() {
-        super("ChatSuffix", Category.CHAT, "Adds a suffix to your messages");
+        super("ChatSuffix", Category.CHAT, "Adds a custom ending to your messages");
     }
 
     Setting blue;
+    Setting green;
+    Setting mode;
 
-    public void setup(){
+    public void setup() {
+        ArrayList<String> modes = new ArrayList<>();
+        modes.add("Default");
+        modes.add("Default + Version");
+        OsirisMod.getInstance().settingsManager.rSetting(mode = new Setting("Mode", this, "Default", modes, "ChatSuffixMode"));
         OsirisMod.getInstance().settingsManager.rSetting(blue = new Setting("Blue", this, false, "ChatSuffixBlue"));
+        OsirisMod.getInstance().settingsManager.rSetting(green = new Setting("Green", this, false, "ChatSuffixGreen"));
     }
 
     @EventHandler
     private Listener<PacketEvent.Send> listener = new Listener<>(event -> {
-        if(event.getPacket() instanceof CPacketChatMessage){
-            if(((CPacketChatMessage) event.getPacket()).getMessage().startsWith("/") || ((CPacketChatMessage) event.getPacket()).getMessage().startsWith(Command.getPrefix())) return;
+        if (event.getPacket() instanceof CPacketChatMessage) {
+            if (((CPacketChatMessage) event.getPacket()).getMessage().startsWith("/") || ((CPacketChatMessage) event.getPacket()).getMessage().startsWith(Command.getPrefix())) return;
             String old = ((CPacketChatMessage) event.getPacket()).getMessage();
-            String suffix = " \u300b" + toUnicode(OsirisMod.MODNAME);
+            String suffix = "";
+            if (mode.getValString().equalsIgnoreCase("Default")) suffix = " " + toUnicode(OsirisMod.MODNAME);
+            if (mode.getValString().equalsIgnoreCase("Default + Version")) suffix = " " + toUnicode(OsirisMod.MODNAME) + " " + toUnicode(OsirisMod.MODVER);
             String s = old + suffix;
-            if(blue.getValBoolean()) s = old + "`" + suffix;
-            if(s.length() > 255) return;
+            if (blue.getValBoolean()) s = old + " `" + suffix;
+            if (green.getValBoolean()) s = old + " >" + suffix;
+            if (s.length() > 255) return;
             ((CPacketChatMessage) event.getPacket()).message = s;
         }
     });
 
-    public void onEnable(){
+    public void onEnable() {
         OsirisMod.EVENT_BUS.subscribe(this);
     }
 
-    public void onDisable(){
+    public void onDisable() {
         OsirisMod.EVENT_BUS.unsubscribe(this);
     }
 
-    public String toUnicode(String s){
+    public String toUnicode(String s) {
         return s.toLowerCase()
                 .replace("a", "\u1d00")
                 .replace("b", "\u0299")
@@ -69,5 +81,6 @@ public class ChatSuffix extends Module {
                 .replace("x", "\u02e3")
                 .replace("y", "\u028f")
                 .replace("z", "\u1d22");
+                //TODO: Add Numbers
     }
 }
