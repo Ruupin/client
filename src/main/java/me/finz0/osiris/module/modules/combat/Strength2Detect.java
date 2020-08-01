@@ -10,16 +10,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.util.text.TextComponentString;
 
-public class str2detect extends Module {
-    public str2detect() {
+public class Strength2Detect extends Module {
+    public Strength2Detect() {
         super("StrengthDetect", Category.COMBAT, "Alerts you when a player has Strength");
     }
     private Set<EntityPlayer> str = Collections.newSetFromMap(new WeakHashMap());
     public static final Minecraft mc = Minecraft.getMinecraft();
 
     public void onUpdate() {
-        for (EntityPlayer player : str2detect.mc.world.playerEntities) {
-            if (player.equals(str2detect.mc.player)) continue;
+        for (EntityPlayer player : Strength2Detect.mc.world.playerEntities) {
+            if (player.equals(Strength2Detect.mc.player)) continue;
             if (player.isPotionActive(MobEffects.STRENGTH) && !this.str.contains(player)) {
                 Minecraft.getMinecraft().player.sendMessage(new TextComponentString(player.getDisplayNameString() + " Has Strength"));
                 this.str.add(player);

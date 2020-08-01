@@ -8,8 +8,8 @@ import net.minecraft.world.World;
 
 import java.util.UUID;
 
-public class fakeplayer extends Module {
-    public fakeplayer() {
+public class FakePlayer extends Module {
+    public FakePlayer() {
         super("FakePlayer", Category.MISC, "Fake Player");
     }
 
@@ -18,7 +18,8 @@ public class fakeplayer extends Module {
             return;
         }
 
-        EntityOtherPlayerMP fakePlayer = new EntityOtherPlayerMP((World)mc.world, new GameProfile(UUID.fromString("f6ceda4b-00d9-46f9-be46-ae994c613055"), "THCFRee"));
+        //OMG POPBOB GUYS NO WAY
+        EntityOtherPlayerMP fakePlayer = new EntityOtherPlayerMP((World)mc.world, new GameProfile(UUID.fromString("0f75a81d-70e5-43c5-b892-f33c524284f2"), "popbob"));
         fakePlayer.copyLocationAndAnglesFrom((Entity)mc.player);
         fakePlayer.rotationYawHead = mc.player.rotationYawHead;
         mc.world.addEntityToWorld(-100, (Entity)fakePlayer);
