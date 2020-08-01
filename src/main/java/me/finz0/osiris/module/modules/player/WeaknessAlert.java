@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class WeaknessAlert extends Module {
     public WeaknessAlert() {
-        super("WeaknessAlert", Category.PLAYER);
+        super("WeaknessAlert", Category.PLAYER, "alerts you when you get weakness lol");
     }
 
     private boolean hasAlertedPlayer = false;

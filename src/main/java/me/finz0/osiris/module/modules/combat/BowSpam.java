@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 
 public class BowSpam extends Module {
     public BowSpam() {
-        super("BowSpam", Category.COMBAT);
+        super("BowSpam", Category.COMBAT, "Releases your bow quickly");
     }
 
     public void onUpdate() {

@@ -12,7 +12,7 @@ import net.minecraft.util.text.TextComponentString;
 
 public class Strength2Detect extends Module {
     public Strength2Detect() {
-        super("StrengthDetect", Category.COMBAT, "Alerts you when a player has Strength");
+        super("StrengthDetect", Category.COMBAT, "Alerts you when a player has strength");
     }
     private Set<EntityPlayer> str = Collections.newSetFromMap(new WeakHashMap());
     public static final Minecraft mc = Minecraft.getMinecraft();

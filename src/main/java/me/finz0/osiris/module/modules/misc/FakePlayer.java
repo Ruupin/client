@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class FakePlayer extends Module {
     public FakePlayer() {
-        super("FakePlayer", Category.MISC, "Fake Player");
+        super("FakePlayer", Category.MISC, "Summons a fake player");
     }
 
     public void onEnable() {

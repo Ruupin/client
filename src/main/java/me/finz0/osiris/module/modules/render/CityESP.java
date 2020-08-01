@@ -31,7 +31,7 @@ import org.lwjgl.opengl.GL11;
 public class CityESP extends Module { //made with THCDeobfuscator :)
 
     public CityESP() {
-        super("CityESP", Category.RENDER, "CityESP");
+        super("CityESP", Category.RENDER, "shows blocks that can be 'cityable'");
     }
     Setting red;
     Setting green;
