@@ -17,10 +17,7 @@ public class FpsComponent extends Panel {
     public FpsComponent(double ix, double iy, ClickGUI parent) {
         super("FPS", ix, iy, 10, 10, false, parent);
         this.isHudComponent = true;
-
     }
-
-
 
     Fps mod = ((Fps)ModuleManager.getModuleByName("FPS"));
 
@@ -29,8 +26,7 @@ public class FpsComponent extends Panel {
     Color text;
     Color color;
 
-
-    public void drawHud(){
+    public void drawHud() {
         doStuff();
         String fps = Minecraft.getDebugFPS() + " FPS";
         if(font) OsirisMod.fontRenderer.drawStringWithShadow(fps, (float)x, (float)y, text.getRGB());

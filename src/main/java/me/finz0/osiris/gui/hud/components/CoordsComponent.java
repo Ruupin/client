@@ -20,8 +20,6 @@ public class CoordsComponent extends Panel {
         this.isHudComponent = true;
     }
 
-
-
     Coords mod = ((Coords) ModuleManager.getModuleByName("Coordinates"));
 
     Color c;
@@ -30,7 +28,7 @@ public class CoordsComponent extends Panel {
     Color color;
 
 
-    public void drawHud(){
+    public void drawHud() {
         doStuff();
 
         Color c = new Color((int) mod.red.getValDouble(), (int) mod.green.getValDouble(), (int) mod.blue.getValDouble());
@@ -70,7 +68,7 @@ public class CoordsComponent extends Panel {
         font = mod.customFont.getValBoolean();
     }
 
-    private String getCoords(){
+    private String getCoords() {
         DecimalFormat decimalFormat = new DecimalFormat(mod.decimal.getValString());
         String x = decimalFormat.format(mc.player.posX);
         String y = decimalFormat.format(mc.player.posY);

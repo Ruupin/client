@@ -20,10 +20,7 @@ public class ExpComponent extends Panel {
     public ExpComponent(double ix, double iy, ClickGUI parent) {
         super("EXP", ix, iy, 10, 10, false, parent);
         this.isHudComponent = true;
-
     }
-
-
 
     Exp mod = ((Exp) ModuleManager.getModuleByName("Exp"));
 
@@ -34,8 +31,7 @@ public class ExpComponent extends Panel {
     Color color;
     String exp;
 
-
-    public void drawHud(){
+    public void drawHud() {
         doStuff();
         if(mod.mode.getValString().equalsIgnoreCase("Item")){
             ItemStack is;

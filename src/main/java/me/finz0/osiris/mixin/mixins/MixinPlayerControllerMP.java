@@ -23,5 +23,4 @@ public class MixinPlayerControllerMP {
     private void resetBlock(CallbackInfo ci){
         if(ModuleManager.isModuleEnabled("BreakTweaks")) ci.cancel();
     }
-
 }

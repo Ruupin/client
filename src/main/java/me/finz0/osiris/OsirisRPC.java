@@ -13,7 +13,7 @@ public class OsirisRPC {
     private static String details;
     private static String state;
 
-    public static void init(){
+    public static void init() {
         final DiscordEventHandlers handlers = new DiscordEventHandlers();
         handlers.disconnected = ((var1, var2) -> System.out.println("Discord RPC disconnected, var1: " + String.valueOf(var1) + ", var2: " + var2));
         rpc.Discord_Initialize(ClientId, handlers, true, "");

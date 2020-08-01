@@ -19,10 +19,7 @@ public class DirectionComponent extends Panel {
     public DirectionComponent(double ix, double iy, ClickGUI parent) {
         super("Direction", ix, iy, 10, 10, false, parent);
         this.isHudComponent = true;
-
     }
-
-
 
     Direction mod = ((Direction) ModuleManager.getModuleByName("Direction"));
 
@@ -32,8 +29,7 @@ public class DirectionComponent extends Panel {
     Color color;
     String direction;
 
-
-    public void drawHud(){
+    public void drawHud() {
         doStuff();
         if(font) OsirisMod.fontRenderer.drawStringWithShadow(direction, (float)x, (float)y, text.getRGB());
         else mc.fontRenderer.drawStringWithShadow(direction, (float)x, (float)y, text.getRGB());

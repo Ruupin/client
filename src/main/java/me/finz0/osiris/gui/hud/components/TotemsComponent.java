@@ -20,10 +20,7 @@ public class TotemsComponent extends Panel {
     public TotemsComponent(double ix, double iy, ClickGUI parent) {
         super("Totems", ix, iy, 10, 10, false, parent);
         this.isHudComponent = true;
-
     }
-
-
 
     Totems mod = ((Totems) ModuleManager.getModuleByName("Totems"));
 
@@ -35,10 +32,9 @@ public class TotemsComponent extends Panel {
     int totems;
     String tot;
 
-
-    public void drawHud(){
+    public void drawHud() {
         doStuff();
-        if(mod.mode.getValString().equalsIgnoreCase("Item")){
+        if(mod.mode.getValString().equalsIgnoreCase("Item")) {
             ItemStack is;
             if(totems == 0) is = new ItemStack(Items.TOTEM_OF_UNDYING);
             else is = new ItemStack(Items.TOTEM_OF_UNDYING, totems);
@@ -54,7 +50,7 @@ public class TotemsComponent extends Panel {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks){
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         doStuff();
         double w = mc.fontRenderer.getStringWidth(tot) + 2;
         c = new Color(50, 50, 50, 100);

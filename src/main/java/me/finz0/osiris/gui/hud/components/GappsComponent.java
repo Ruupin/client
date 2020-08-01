@@ -20,10 +20,7 @@ public class GappsComponent extends Panel {
     public GappsComponent(double ix, double iy, ClickGUI parent) {
         super("Gapples", ix, iy, 10, 10, false, parent);
         this.isHudComponent = true;
-
     }
-
-
 
     Gapples mod = ((Gapples) ModuleManager.getModuleByName("Gapples"));
 
@@ -33,7 +30,6 @@ public class GappsComponent extends Panel {
     Color color;
     String gaps;
     int gapples;
-
 
     public void drawHud(){
         doStuff();

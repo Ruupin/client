@@ -36,10 +36,8 @@ public class MixinGuiScreen {
                         ShulkerPreview.drawX = x;
                         ShulkerPreview.drawY = y;
                     }
-
                 }
             }
         }
     }
-
 }

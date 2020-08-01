@@ -49,7 +49,6 @@ public class CategoryButton {
             newX = x - mouseX;
             newY = y - mouseY;
         }
-
         return false;
     }
 }

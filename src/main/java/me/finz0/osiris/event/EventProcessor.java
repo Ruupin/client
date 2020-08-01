@@ -354,5 +354,4 @@ public class EventProcessor {
         pointY = pointY - j;
         return pointX >= rectX - 1 && pointX < rectX + rectWidth + 1 && pointY >= rectY - 1 && pointY < rectY + rectHeight + 1;
     }
-
 }

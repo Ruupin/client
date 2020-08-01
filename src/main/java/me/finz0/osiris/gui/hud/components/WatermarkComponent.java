@@ -16,10 +16,7 @@ public class WatermarkComponent extends Panel {
     public WatermarkComponent(double ix, double iy, ClickGUI parent) {
         super("Watermark", ix, iy, 10, 10, true, parent);
         this.isHudComponent = true;
-
     }
-
-
 
     Watermark mod = ((Watermark) ModuleManager.getModuleByName("Watermark"));
 
@@ -28,8 +25,7 @@ public class WatermarkComponent extends Panel {
     Color text;
     Color color;
 
-
-    public void drawHud(){
+    public void drawHud() {
         doStuff();
         String s = OsirisMod.MODNAME + " ";
         if(mod.version.getValBoolean()) s += OsirisMod.MODVER;

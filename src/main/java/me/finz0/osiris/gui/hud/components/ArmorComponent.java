@@ -19,18 +19,13 @@ public class ArmorComponent extends Panel {
     public ArmorComponent(double ix, double iy, ClickGUI parent) {
         super("Armor", ix, iy, 10, 10, false, parent);
         this.isHudComponent = true;
-
     }
 
-
-
     ArmorHUD mod = ((ArmorHUD) ModuleManager.getModuleByName("ArmorHUD"));
-
 
     boolean vertical;
     boolean reverse;
     Color c;
-
 
     public void drawHud(){
         drawArmor((int)x, (int)y);
@@ -52,7 +47,7 @@ public class ArmorComponent extends Panel {
         if(extended) {
             double startY = y + 15;
             //Gui.drawRect((int) x, (int) startY, (int) x + (int) width, (int) startY + (int) height, c.getRGB());
-            if(vertical){
+            if(vertical) {
                 width = 20;
                 height = 18 * 4;
             } else width = 18 * 4;
@@ -60,14 +55,14 @@ public class ArmorComponent extends Panel {
         }
     }
 
-    private void drawArmor(int x, int y){
+    private void drawArmor(int x, int y) {
         vertical = mod.vertical.getValBoolean();
         reverse = mod.reverse.getValBoolean();
         int i = 0;
         List<ItemStack> armor = new ArrayList<>();
         for(ItemStack is : mc.player.getArmorInventoryList()) armor.add(is);
         if(reverse) Collections.reverse(armor);
-        for(ItemStack is : armor){
+        for(ItemStack is : armor) {
             int yy = y;
             int xx = x + i;
             if(vertical){

@@ -16,10 +16,7 @@ public class WelcomerComponent extends Panel {
     public WelcomerComponent(double ix, double iy, ClickGUI parent) {
         super("Welcome", ix, iy, 10, 10, false, parent);
         this.isHudComponent = true;
-
     }
-
-
 
     WelcomerGui mod = ((WelcomerGui) ModuleManager.getModuleByName("Welcome"));
 
@@ -29,15 +26,14 @@ public class WelcomerComponent extends Panel {
     Color color;
     String msg;
 
-
-    public void drawHud(){
+    public void drawHud() {
         doStuff();
         if(font) OsirisMod.fontRenderer.drawStringWithShadow(msg, (float)x, (float)y, text.getRGB());
         else mc.fontRenderer.drawStringWithShadow(msg, (float)x, (float)y, text.getRGB());
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks){
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         doStuff();
         double w = mc.fontRenderer.getStringWidth(msg) + 2;
         c = new Color(50, 50, 50, 100);

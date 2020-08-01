@@ -219,5 +219,4 @@ public class EntityUtil {
         return debugInfo.getResponseTime();
 
     }
-
 }

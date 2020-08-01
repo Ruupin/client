@@ -28,5 +28,4 @@ public class MixinGuiPlayerTabOverlay {
         else if (Enemies.isEnemy(dname)) return TextFormatting.RED + dname;
         else return dname;
     }
-
 }

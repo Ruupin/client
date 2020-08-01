@@ -29,7 +29,6 @@ public class ElementColorPicker extends Element {
         } catch(IOException e){
             e.printStackTrace();
         }
-
     }
 
     BufferedImage image;
@@ -38,7 +37,6 @@ public class ElementColorPicker extends Element {
 
     int downScale;
     int upScale;
-
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         Gui.drawRect((int)x, (int)y, (int)x + (int)width, (int)y + (int)height, 0xff1a1a1a);

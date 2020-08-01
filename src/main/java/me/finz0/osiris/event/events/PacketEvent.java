@@ -37,5 +37,4 @@ public class PacketEvent extends OsirisEvent {
             super(packet);
         }
     }
-
 }

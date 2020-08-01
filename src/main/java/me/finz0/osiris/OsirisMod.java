@@ -26,7 +26,6 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
 
 import java.awt.*;
-// ching chong
 
 @Mod(modid = OsirisMod.MODID, name = OsirisMod.FORGENAME, version = OsirisMod.MODVER, clientSideOnly = true)
 public class OsirisMod {
@@ -61,7 +60,6 @@ public class OsirisMod {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
         //log.info("PreInitialization complete!\n");
-
     }
 
     @Mod.EventHandler
@@ -117,5 +115,4 @@ public class OsirisMod {
     public static OsirisMod getInstance(){
         return INSTANCE;
     }
-
 }

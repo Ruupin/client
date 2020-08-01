@@ -24,8 +24,6 @@ public class HoleComponent extends Panel {
         this.isHudComponent = true;
     }
 
-
-
     CurrentHole mod = ((CurrentHole) ModuleManager.getModuleByName("Hole"));
 
     Color c;
@@ -35,7 +33,6 @@ public class HoleComponent extends Panel {
     boolean bedrock;
     boolean obby;
     boolean safe;
-
 
     public void drawHud(){
         doStuff();
@@ -175,5 +172,4 @@ public class HoleComponent extends Panel {
         BlockPos playerPos = new BlockPos(vec3d);
         return mc.world.getBlockState(playerPos.west()).getBlock() == Blocks.BEDROCK;
     }
-
 }

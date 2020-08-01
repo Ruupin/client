@@ -47,7 +47,6 @@ public class ModuleButton {
             newX = x - mouseX;
             newY = y - mouseY;
         }
-
         return false;
     }
 }

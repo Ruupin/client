@@ -214,9 +214,7 @@ public class ModuleManager {
         Module m = getModules().stream().filter(mm->mm.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
         return m.isEnabled();
     }
-
     public static boolean isModuleEnabled(Module m){
         return m.isEnabled();
     }
-
 }

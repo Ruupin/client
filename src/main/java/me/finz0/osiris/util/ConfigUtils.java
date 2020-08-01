@@ -972,6 +972,5 @@ public class ConfigUtils {
             var11.printStackTrace();
             //aveSettingsList();
         }
-
     }
 }

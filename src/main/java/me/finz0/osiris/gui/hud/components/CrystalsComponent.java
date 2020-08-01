@@ -20,10 +20,7 @@ public class CrystalsComponent extends Panel {
     public CrystalsComponent(double ix, double iy, ClickGUI parent) {
         super("Crystals", ix, iy, 10, 10, false, parent);
         this.isHudComponent = true;
-
     }
-
-
 
     Crystals mod = ((Crystals) ModuleManager.getModuleByName("Crystals"));
 
@@ -34,7 +31,6 @@ public class CrystalsComponent extends Panel {
 
     int crystals;
     String cry;
-
 
     public void drawHud(){
         doStuff();

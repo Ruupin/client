@@ -25,7 +25,6 @@ public class PvpinfoComponent extends Panel {
     Color off;
     Color on;
 
-
     public void drawHud(){
         doStuff();
         draw();

@@ -13,6 +13,4 @@ public class PlayerLeaveEvent extends OsirisEvent {
     public String getName(){
         return name;
     }
-
-
 }

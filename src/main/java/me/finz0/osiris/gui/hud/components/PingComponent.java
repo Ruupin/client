@@ -17,10 +17,7 @@ public class PingComponent extends Panel {
     public PingComponent(double ix, double iy, ClickGUI parent) {
         super("Ping", ix, iy, 10, 10, false, parent);
         this.isHudComponent = true;
-
     }
-
-
 
     Ping mod = ((Ping) ModuleManager.getModuleByName("Ping"));
 
@@ -30,8 +27,7 @@ public class PingComponent extends Panel {
     Color color;
     DecimalFormat decimalFormat = new DecimalFormat("##.#");
 
-
-    public void drawHud(){
+    public void drawHud() {
         doStuff();
         String ping = mod.getPing() + "ms";
         if(font) OsirisMod.fontRenderer.drawStringWithShadow(ping, (float)x, (float)y, text.getRGB());

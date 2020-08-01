@@ -18,10 +18,7 @@ public class TpsComponent extends Panel {
     public TpsComponent(double ix, double iy, ClickGUI parent) {
         super("TPS", ix, iy, 10, 10, false, parent);
         this.isHudComponent = true;
-
     }
-
-
 
     Tps mod = ((Tps) ModuleManager.getModuleByName("TPS"));
 
@@ -30,7 +27,6 @@ public class TpsComponent extends Panel {
     Color text;
     Color color;
     DecimalFormat decimalFormat = new DecimalFormat("##.#");
-
 
     public void drawHud(){
         doStuff();

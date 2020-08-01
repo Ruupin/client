@@ -18,10 +18,7 @@ public class TimeComponent extends Panel {
     public TimeComponent(double ix, double iy, ClickGUI parent) {
         super("Time", ix, iy, 10, 10, false, parent);
         this.isHudComponent = true;
-
     }
-
-
 
     Time mod = ((Time) ModuleManager.getModuleByName("Time"));
 
@@ -30,8 +27,7 @@ public class TimeComponent extends Panel {
     Color text;
     Color color;
 
-
-    public void drawHud(){
+    public void drawHud() {
         doStuff();
         String date = new SimpleDateFormat("k:mm").format(new Date());
         if(font) OsirisMod.fontRenderer.drawStringWithShadow(date, (float)x, (float)y, text.getRGB());
@@ -39,7 +35,7 @@ public class TimeComponent extends Panel {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks){
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         doStuff();
         String date = new SimpleDateFormat("k:mm").format(new Date());
         double w = mc.fontRenderer.getStringWidth(date) + 2;

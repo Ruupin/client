@@ -18,10 +18,7 @@ public class BpsComponent extends Panel {
     public BpsComponent(double ix, double iy, ClickGUI parent) {
         super("BPS", ix, iy, 10, 10, false, parent);
         this.isHudComponent = true;
-
     }
-
-
 
     Bps mod = ((Bps) ModuleManager.getModuleByName("BPS"));
 
@@ -31,7 +28,7 @@ public class BpsComponent extends Panel {
     Color color;
     final DecimalFormat df = new DecimalFormat("0.0");
 
-    public void drawHud(){
+    public void drawHud() {
         doStuff();
         final double deltaX = mc.player.posX - mc.player.prevPosX;
         final double deltaZ = mc.player.posZ - mc.player.prevPosZ;

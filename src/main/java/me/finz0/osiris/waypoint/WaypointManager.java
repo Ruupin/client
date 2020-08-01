@@ -27,5 +27,4 @@ public class WaypointManager {
         Waypoint point = waypoints.stream().filter(w -> w.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
         return point;
     }
-
 }

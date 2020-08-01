@@ -21,13 +21,9 @@ public class PlayerComponent extends Panel {
         this.isHudComponent = true;
     }
 
-
-
-
     Color c;
     float mouseXX;
     float mouseYY;
-
 
     public void drawHud(){
         mouseXX = mc.getRenderViewEntity().rotationYaw * -1;

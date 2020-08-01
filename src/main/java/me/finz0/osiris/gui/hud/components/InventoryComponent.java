@@ -19,12 +19,8 @@ public class InventoryComponent extends Panel {
     public InventoryComponent(double ix, double iy, ClickGUI parent) {
         super("Inventory", ix, iy, 10, 10, false, parent);
         this.isHudComponent = true;
-        resource = new ResourceLocation("textures/gui/container/shulker_box.png");;
-
+        resource = new ResourceLocation("textures/gui/container/shulker_box.png");
     }
-
-
-
 
     Color c;
     ResourceLocation resource;
@@ -52,7 +48,7 @@ public class InventoryComponent extends Panel {
         }
     }
 
-    public void drawInventory(int x, int y){
+    public void drawInventory(int x, int y) {
         //GlStateManager.disableBlend();
         GlStateManager.enableAlpha();
         //GlStateManager.disableDepth();
