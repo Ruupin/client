@@ -18,28 +18,30 @@ public class OsirisRPC {
         handlers.disconnected = ((var1, var2) -> System.out.println("Discord RPC disconnected, var1: " + String.valueOf(var1) + ", var2: " + var2));
         rpc.Discord_Initialize(ClientId, handlers, true, "");
         presence.startTimestamp = System.currentTimeMillis() / 1000L;
-        presence.details = mc.player.getName();
-        presence.state = "Main Menu";
+        presence.details = OsirisMod.FORGENAME + OsirisMod.MODVER;
+        presence.state = "discord.gg/8pYjUGk";
         presence.largeImageKey = "osirisplus";
-        presence.largeImageText = "Osiris+ " + OsirisMod.MODVER;
+        presence.largeImageText = OsirisMod.FORGENAME + OsirisMod.MODVER;
+        presence.smallImageKey = "default";
+        presence.smallImageText = mc.getSession().getUsername();
 
         rpc.Discord_UpdatePresence(presence);
         new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
                     rpc.Discord_RunCallbacks();
-                    details = mc.player.getName();
-                    state = "";
+                    details = OsirisMod.FORGENAME + OsirisMod.MODVER;
+                    state = "discord.gg/8pYjUGk";
                     if (mc.isIntegratedServerRunning()) {
-                        state = "Singleplayer";
+                        details = "Singleplayer";
                     }
                     else if (mc.getCurrentServerData() != null) {
                         if (!mc.getCurrentServerData().serverIP.equals("")) {
-                            state = mc.getCurrentServerData().serverIP;
+                            details = mc.getCurrentServerData().serverIP;
                         }
 
                     } else {
-                        state = "Main Menu";
+                        details = "Main Menu";
                     }
                     if (!details.equals(presence.details) || !state.equals(presence.state)) {
                         presence.startTimestamp = System.currentTimeMillis() / 1000L;
