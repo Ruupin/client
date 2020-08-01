@@ -15,28 +15,28 @@ public abstract class Command {
     public abstract void onCommand(String command, String[] args) throws Exception;
 
     public static boolean MsgWaterMark = true;
-    public static ChatFormatting cf = ChatFormatting.GRAY;
+    public static ChatFormatting cf = ChatFormatting.WHITE;
 
-    public static void sendClientMessage(String message){
+    public static void sendClientMessage(String message) {
             NotificationsHud.addMessage(new TextComponentString(cf + message));
-        if(MsgWaterMark)
-            mc.player.sendMessage(new TextComponentString("\u1d0f\ua731\u026a\u0280\u026a\ua731\uFE62 \u300b"+ cf + message));
+        if (MsgWaterMark)
+            mc.player.sendMessage(new TextComponentString(ChatFormatting.GRAY + "[" + ChatFormatting.RED + "Osiris+" + ChatFormatting.GRAY + "] " + cf + message));
         else
             mc.player.sendMessage(new TextComponentString(cf + message));
     }
 
-    public static Color getColorFromChatFormatting(ChatFormatting cf){
-        if(cf == ChatFormatting.BLACK) return Color.BLACK;
-        if(cf == ChatFormatting.GRAY) return  Color.GRAY;
-        if(cf == ChatFormatting.AQUA) return Color.CYAN;
-        if(cf == ChatFormatting.BLUE || cf == ChatFormatting.DARK_BLUE || cf == ChatFormatting.DARK_AQUA) return Color.BLUE;
-        if(cf == ChatFormatting.DARK_GRAY) return Color.DARK_GRAY;
-        if(cf == ChatFormatting.DARK_GREEN || cf == ChatFormatting.GREEN) return Color.GREEN;
-        if(cf == ChatFormatting.DARK_PURPLE) return Color.MAGENTA;
-        if(cf == ChatFormatting.RED || cf == ChatFormatting.DARK_RED) return Color.RED;
-        if(cf == ChatFormatting.LIGHT_PURPLE) return Color.PINK;
-        if(cf == ChatFormatting.YELLOW) return Color.YELLOW;
-        if(cf == ChatFormatting.GOLD) return Color.ORANGE;
+    public static Color getColorFromChatFormatting(ChatFormatting cf) {
+        if (cf == ChatFormatting.BLACK) return Color.BLACK;
+        if (cf == ChatFormatting.GRAY) return  Color.GRAY;
+        if (cf == ChatFormatting.AQUA) return Color.CYAN;
+        if (cf == ChatFormatting.BLUE || cf == ChatFormatting.DARK_BLUE || cf == ChatFormatting.DARK_AQUA) return Color.BLUE;
+        if (cf == ChatFormatting.DARK_GRAY) return Color.DARK_GRAY;
+        if (cf == ChatFormatting.DARK_GREEN || cf == ChatFormatting.GREEN) return Color.GREEN;
+        if (cf == ChatFormatting.DARK_PURPLE) return Color.MAGENTA;
+        if (cf == ChatFormatting.RED || cf == ChatFormatting.DARK_RED) return Color.RED;
+        if (cf == ChatFormatting.LIGHT_PURPLE) return Color.PINK;
+        if (cf == ChatFormatting.YELLOW) return Color.YELLOW;
+        if (cf == ChatFormatting.GOLD) return Color.ORANGE;
         return Color.WHITE;
     }
 
