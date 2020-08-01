@@ -11,13 +11,14 @@ public class RpcModule extends Module {
         setDrawn(false);
     }
 
-    public void onEnable(){
+    public void onEnable() {
         OsirisRPC.init();
         if(mc.player != null)
             Command.sendClientMessage(ChatFormatting.WHITE + "Discord RPC " + ChatFormatting.GREEN + "started!");
     }
 
-    public void onDisable(){
-        Command.sendClientMessage(ChatFormatting.WHITE + "You need to" + ChatFormatting.RED + " restart your game " + ChatFormatting.WHITE + "to disable the RPC.");
+    public void onDisable() {
+        OsirisRPC.shutdown();
+        Command.sendClientMessage(ChatFormatting.WHITE + "Discord RPC " + ChatFormatting.RED + "shutdown!");
     }
 }

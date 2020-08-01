@@ -80,7 +80,50 @@ public class ChatSuffix extends Module {
                 .replace("w", "\u1d21")
                 .replace("x", "\u02e3")
                 .replace("y", "\u028f")
-                .replace("z", "\u1d22");
-                //TODO: Add Numbers
+                .replace("z", "\u1d22")
+                //Numbers!
+                .replace("1", "")
+                .replace("2", "")
+                .replace("3", "")
+                .replace("4", "")
+                .replace("5", "")
+                .replace("6", "")
+                .replace("7", "")
+                .replace("8", "")
+                .replace("9", "")
+                .replace("0", "")
+                //Characters!
+                .replace("!", "")
+                .replace("@", "")
+                .replace("#", "")
+                .replace("$", "")
+                .replace("%", "")
+                .replace("^", "")
+                .replace("&", "")
+                .replace("*", "")
+                .replace("(", "")
+                .replace(")", "")
+                .replace("`", "")
+                .replace("~", "")
+                .replace("-", "")
+                .replace("=", "")
+                .replace("_", "")
+                .replace("+", "")
+                .replace("[", "")
+                .replace("]", "")
+                .replace("{", "")
+                .replace("}", "")
+//Well, shit.    .replace("\", "") //Doesn't work :(
+                .replace("|", "")
+                .replace(";", "")
+                .replace("'", "")
+                .replace(":", "")
+//Well, shit.    .replace(""", "") //Doesn't work :(
+                .replace(",", "")
+                .replace(".", "")
+                .replace("/", "")
+                .replace("<", "")
+                .replace(">", "")
+                .replace("?", "");
     }
 }
