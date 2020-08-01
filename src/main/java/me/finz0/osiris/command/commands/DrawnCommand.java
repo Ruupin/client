@@ -13,7 +13,7 @@ public class DrawnCommand extends Command {
 
     @Override
     public String getSyntax() {
-        return "drawn <Module>";
+        return ChatFormatting.RED + "Usage: " + ChatFormatting.WHITE + Command.prefix + "drawn <module>";
     }
 
     @Override
@@ -24,11 +24,11 @@ public class DrawnCommand extends Command {
                 if(m.isDrawn()){
                     m.setDrawn(false);
                     found = true;
-                    Command.sendClientMessage(m.getName() + ChatFormatting.RED + " drawn = false");
+                    Command.sendClientMessage(ChatFormatting.AQUA + m.getName() + ChatFormatting.WHITE + " drawn = " + ChatFormatting.RED +"false");
                 } else if(!m.isDrawn()){
                     m.setDrawn(true);
                     found = true;
-                    Command.sendClientMessage(m.getName() + ChatFormatting.GREEN + " drawn = true");
+                    Command.sendClientMessage(ChatFormatting.AQUA + m.getName() + ChatFormatting.WHITE + " drawn = " + ChatFormatting.GREEN +"true");
                 }
             }
         });
