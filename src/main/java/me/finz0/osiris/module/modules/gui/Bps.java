@@ -31,6 +31,4 @@ public class Bps extends Module {
     public void onEnable(){
         disable();
     }
-
-
 }

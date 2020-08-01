@@ -24,5 +24,4 @@ public class ShulkerPreview extends Module {
     public void onUpdate(){
         if(!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) pinned = false;
     }
-
 }

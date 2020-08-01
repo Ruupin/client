@@ -54,9 +54,7 @@ public class AutoReplanish extends Module {
             fullInventorySlots.put(current, mc.player.inventoryContainer.getInventory().get(current));
             current++;
         }
-
         return fullInventorySlots;
-
     }
 
     public void onUpdate() {
@@ -93,7 +91,6 @@ public class AutoReplanish extends Module {
 
         // put back inventory slot
         mc.playerController.windowClick(0, inventorySlot, 0, ClickType.PICKUP, mc.player);
-
     }
 
     /**
@@ -134,9 +131,7 @@ public class AutoReplanish extends Module {
             returnPair = new Pair<>(inventorySlot, hotbarSlot.getKey());
 
         }
-
         return returnPair;
-
     }
 
     /**
@@ -168,11 +163,8 @@ public class AutoReplanish extends Module {
                 smallestStackSize = currentStackSize;
                 inventorySlot = entry.getKey();
             }
-
         }
-
         return inventorySlot;
-
     }
 
     /**
@@ -194,9 +186,7 @@ public class AutoReplanish extends Module {
         if ((stack1.getItem() instanceof ItemBlock) && (stack2.getItem() instanceof ItemBlock)) {
             Block block1 = ((ItemBlock) stack1.getItem()).getBlock();
             Block block2 = ((ItemBlock) stack2.getItem()).getBlock();
-
             }
-
 
         // check if not same names
         if (!stack1.getDisplayName().equals(stack2.getDisplayName())) {
@@ -208,9 +198,6 @@ public class AutoReplanish extends Module {
         if (stack1.getItemDamage() != stack2.getItemDamage()) {
             return false;
         }
-
         return true;
-
     }
-
 }

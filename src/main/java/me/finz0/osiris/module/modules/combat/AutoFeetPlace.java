@@ -145,7 +145,6 @@ public class AutoFeetPlace extends Module {
         if (announceUsage.getValBoolean()) {
             Command.sendClientMessage("[AutoFeetPlace] " + ChatFormatting.GREEN.toString() + "Enabled!");
         }
-
     }
 
     @Override
@@ -171,7 +170,6 @@ public class AutoFeetPlace extends Module {
         if (announceUsage.getValBoolean()) {
             Command.sendClientMessage("[AutoFeetPlace] " + ChatFormatting.RED.toString() + "Disabled!");
         }
-
     }
 
     @Override
@@ -208,8 +206,6 @@ public class AutoFeetPlace extends Module {
             Vec3d[] offsetPattern = new Vec3d[0];
             int maxSteps = 0;
 
-
-
              {
                 offsetPattern = Offsets.SURROUND;
                 maxSteps = Offsets.SURROUND.length;
@@ -226,13 +222,10 @@ public class AutoFeetPlace extends Module {
             if (placeBlock(targetPos)) {
                 blocksPlaced++;
             }
-
             offsetStep++;
-
         }
 
         if (blocksPlaced > 0) {
-
             if (lastHotbarSlot != playerHotbarSlot && playerHotbarSlot != -1) {
                 mc.player.inventory.currentItem = playerHotbarSlot;
                 lastHotbarSlot = playerHotbarSlot;
@@ -242,11 +235,8 @@ public class AutoFeetPlace extends Module {
                 mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
                 isSneaking = false;
             }
-
         }
-
         totalTicksRunning++;
-
     }
 
     private boolean placeBlock(BlockPos pos) {
@@ -308,10 +298,7 @@ public class AutoFeetPlace extends Module {
 
         mc.player.connection.sendPacket(new CPacketPlayerDigging(CPacketPlayerDigging.Action.START_DESTROY_BLOCK, neighbour, opposite));
 
-
-
         return true;
-
     }
 
     private int findObiInHotbar() {
@@ -332,11 +319,8 @@ public class AutoFeetPlace extends Module {
                 slot = i;
                 break;
             }
-
         }
-
         return slot;
-
     }
 
     private enum Mode {
@@ -344,7 +328,6 @@ public class AutoFeetPlace extends Module {
     }
 
     private static class Offsets {
-
         private static final Vec3d[] SURROUND = {
                 new Vec3d(1, 0, 0),
                 new Vec3d(0, 0, 1),
@@ -367,7 +350,5 @@ public class AutoFeetPlace extends Module {
                 new Vec3d(0, -1, -1),
                 new Vec3d(0, -1, 0)
         };
-
     }
-
 }

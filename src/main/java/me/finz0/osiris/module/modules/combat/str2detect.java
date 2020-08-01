@@ -10,7 +10,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.util.text.TextComponentString;
 
-
 public class str2detect extends Module {
     public str2detect() {
         super("StrengthDetect", Category.COMBAT, "Alerts you when a player has Strength");

@@ -70,5 +70,4 @@ public class ChatSuffix extends Module {
                 .replace("y", "\u028f")
                 .replace("z", "\u1d22");
     }
-
 }

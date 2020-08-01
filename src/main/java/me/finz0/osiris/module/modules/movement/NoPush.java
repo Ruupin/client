@@ -6,4 +6,5 @@ public class NoPush extends Module {
     public NoPush() {
         super("NoPush", Category.MOVEMENT, "Don't get pushed by entities");
     }
+    //fuck those school bullies
 }

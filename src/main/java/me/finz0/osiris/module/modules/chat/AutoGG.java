@@ -143,7 +143,6 @@ public class AutoGG extends Module {
         }
     }
 
-
     public static void addAutoGgMessage(String s){
         AutoGgMessages.add(s);
     }

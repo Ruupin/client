@@ -19,5 +19,4 @@ public class Notifications extends Module {
         catch (AWTException e) { e.printStackTrace(); }
         icon.displayMessage("Osiris", message, messageType);
     }
-
 }

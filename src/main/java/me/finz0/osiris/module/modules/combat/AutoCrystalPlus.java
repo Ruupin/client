@@ -556,7 +556,6 @@ public class AutoCrystalPlus extends Module {
                 }
             }
         }
-
     });
     @Override
     public void onEnable() {

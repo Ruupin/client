@@ -12,8 +12,6 @@ public class Tps extends Module {
         INSTANCE = this;
     }
 
-
-
     public Setting red;
     public Setting green;
     public Setting blue;

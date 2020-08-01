@@ -24,7 +24,6 @@ public class Freecam extends Module {
     double y;
     double z;
 
-
     public void onEnable(){
         disable();
         OsirisMod.EVENT_BUS.subscribe(this);
@@ -82,7 +81,4 @@ public class Freecam extends Module {
             event.cancel();
         }
     });
-
-
-
 }

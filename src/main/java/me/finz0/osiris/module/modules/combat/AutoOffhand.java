@@ -115,5 +115,4 @@ public class AutoOffhand extends Module {
         if(mode.getValString().equalsIgnoreCase("Gapple")) t = "G " + gapples;
         return t;
     }
-
 }

@@ -79,5 +79,4 @@ public class GlowESP extends Module {
     public static boolean isMonster(Entity entity) {
         return entity.isCreatureType(EnumCreatureType.MONSTER, false);
     }
-
 }

@@ -185,6 +185,4 @@ public class AutoNomadHut extends Module {
     private static Vec3d getEyesPos() {
         return new Vec3d(mc.player.posX, mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ);
     }
-
-
 }
