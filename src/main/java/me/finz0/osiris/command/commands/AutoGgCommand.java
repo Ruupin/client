@@ -12,7 +12,7 @@ public class AutoGgCommand extends Command {
 
     @Override
     public String getSyntax() {
-        return ChatFormatting.RED + "Usage: " + ChatFormatting.WHITE + Command.prefix + "autogg (add or del) <message>. (Use \"{name}\" for the player's name and use \"_\" for spaces)";
+        return ChatFormatting.RED + "Usage: " + ChatFormatting.WHITE + Command.prefix + "autogg (add or del) <message>, (Use \"{name}\" for the player's name and use \"_\" for spaces)";
     }
 
     @Override
