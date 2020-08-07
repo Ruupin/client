@@ -1,9 +1,6 @@
 package me.finz0.osiris.event;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import de.Hero.clickgui.ClickGUI;
-import de.Hero.clickgui.Panel;
-import me.finz0.osiris.gui.hud.HudComponentManager;
 import me.finz0.osiris.OsirisMod;
 import me.finz0.osiris.command.Command;
 import me.finz0.osiris.command.CommandManager;
@@ -103,12 +100,6 @@ public class EventProcessor {
         if(event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
             //module onRender
             ModuleManager.onRender();
-            //HudComponent stuff
-            for(Panel p : HudComponentManager.hudComponents){
-                if(p.isHudComponent && p.isHudComponentPinned && p.visible && !(mc.currentScreen instanceof ClickGUI))
-                    p.drawHud();
-            }
-
         }
     }
 

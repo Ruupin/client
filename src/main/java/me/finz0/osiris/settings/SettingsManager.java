@@ -34,9 +34,7 @@ public class SettingsManager {
 				out.add(s);
 			}
 		}
-		if(out.isEmpty()){
-			return null;
-		}
+
 		return out;
 	}
 	

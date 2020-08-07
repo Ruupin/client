@@ -1,7 +1,6 @@
 package me.finz0.osiris.command;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import me.finz0.osiris.module.modules.gui.NotificationsHud;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.TextComponentString;
 
@@ -18,7 +17,6 @@ public abstract class Command {
     public static ChatFormatting cf = ChatFormatting.WHITE;
 
     public static void sendClientMessage(String message) {
-            NotificationsHud.addMessage(new TextComponentString(cf + message));
         if (MsgWaterMark)
             mc.player.sendMessage(new TextComponentString(ChatFormatting.GRAY + "[" + ChatFormatting.RED + "Osiris+" + ChatFormatting.GRAY + "] " + cf + message));
         else

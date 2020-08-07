@@ -107,29 +107,10 @@ public class ModuleManager {
         addMod(new TabGui());
         addMod(new ShulkerPreview());
         addMod(new CityESP());
-        //GUI
-        addMod(new ModList());
-        addMod(new ClickGuiModule());
-        addMod(new Watermark());
-        addMod(new Totems());
-        addMod(new Crystals());
-        addMod(new Gapples());
-        addMod(new Exp());
-        addMod(new Coords());
-        addMod(new Fps());
-        addMod(new Time());
-        addMod(new Players());
-        addMod(new Tps());
-        addMod(new Ping());
-        addMod(new PvpInfo());
-        addMod(new WelcomerGui());
-        addMod(new Bps());
-        addMod(new PotionEffects());
-        addMod(new NotificationsHud());
-        addMod(new Direction());
-        addMod(new ArmorHUD());
-        addMod(new CurrentHole());
-        //addMod(new CsClickGuiModule());
+
+        // Gui.
+        addMod(new OsirisPlusGUIModule());
+        addMod(new OsirisPlusHUDModule());
     }
 
     public static void addMod(Module m){
