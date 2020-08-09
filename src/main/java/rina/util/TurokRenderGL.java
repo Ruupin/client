@@ -86,4 +86,23 @@ public class TurokRenderGL {
 		GL11.glScaled(0.5, 0.5, 0.5);
 		GL11.glPopMatrix();
 	}
+
+	public static void init2D() {
+		GL11.glPushMatrix();
+
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL11.GL_BLEND);
+
+		GlStateManager.enableBlend();
+
+		GL11.glPopMatrix();
+	}
+
+	public static void release2D() {
+		GlStateManager.enableCull();
+		GlStateManager.depthMask(true);
+		GlStateManager.enableTexture2D();
+		GlStateManager.enableBlend();
+		GlStateManager.enableDepth();
+	}
 }

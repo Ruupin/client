@@ -19,11 +19,16 @@ import org.lwjgl.opengl.GL11;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import rina.hud.OsirisPlusHUD;
+
 public class ModuleManager {
     public static ArrayList<Module> modules;
+    public static ArrayList<OsirisPlusHUD> hud_list;
 
     public ModuleManager(){
-        modules = new ArrayList<>();
+        modules  = new ArrayList<>();
+        hud_list = new ArrayList<>();
+
         //Combat
         addMod(new AutoArmor());
         addMod(new KillAura());
@@ -111,10 +116,19 @@ public class ModuleManager {
         // Gui.
         addMod(new OsirisPlusGUIModule());
         addMod(new OsirisPlusHUDModule());
+
+        // HUD.
+        addHUD(new HUDArrayList());
+        addHUD(new HUDCoordinates());
     }
 
     public static void addMod(Module m){
         modules.add(m);
+    }
+
+    public static void addHUD(OsirisPlusHUD hud){
+        modules.add((Module) hud);
+        hud_list.add(hud);
     }
 
     public static void onUpdate() {
@@ -169,6 +183,10 @@ public class ModuleManager {
 
     public static ArrayList<Module> getModules() {
         return modules;
+    }
+
+    public static ArrayList<OsirisPlusHUD> getHUDList() {
+        return hud_list;
     }
 
     public static ArrayList<Module> getModulesInCategory(Module.Category c){

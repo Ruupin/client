@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.client.renderer.*;
