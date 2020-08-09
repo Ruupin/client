@@ -31,7 +31,7 @@ public class WeaknessAlert extends Module {
         if (mc.player.isPotionActive(MobEffects.WEAKNESS) && !hasAlertedPlayer) {
             if (mode.getValString().equalsIgnoreCase("advanced")) {
                 PotionEffect weakness = mc.player.getActivePotionEffect(MobEffects.WEAKNESS);
-                int amplifier = weakness.getAmplifier() + 1; //might give a NullPointerException, will fix if it happens - ollie.
+                int amplifier = weakness.getAmplifier() + 1;
                 double duration = weakness.getDuration() / TpsUtils.getTickRate();
                 double p1 = duration % 60;
                 double p2 = duration / 60;
