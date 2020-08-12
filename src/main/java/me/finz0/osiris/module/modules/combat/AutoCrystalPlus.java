@@ -166,7 +166,7 @@ public class AutoCrystalPlus extends Module {
         isActive = false;
 		placeSpeedTicks++;
         if(mc.player == null || mc.player.isDead) return; // bruh
-	if(isEatingGap() && pauseWhileEating.getValue()) {
+	if(isEatingGap() && pauseWhileEating.getValBoolean()) {
 	    return;	
 	}
         EntityEnderCrystal crystal = mc.world.loadedEntityList.stream()
