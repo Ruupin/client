@@ -109,7 +109,6 @@ public class OsirisPlusWidgetCombo extends OsirisPlusWidgetAbstract {
 		this.event_mouse = false;
 
 		this.list  = new ArrayList<>();
-		this.index = 0;
 
 		for (String options : this.setting.getOptions()) {
 			this.list.add(options);

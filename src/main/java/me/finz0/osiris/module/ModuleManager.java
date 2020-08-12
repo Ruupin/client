@@ -120,6 +120,7 @@ public class ModuleManager {
         // HUD.
         addHUD(new HUDArrayList());
         addHUD(new HUDCoordinates());
+        addHUD(new HUDGUIWatermark());
     }
 
     public static void addMod(Module m){

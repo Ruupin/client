@@ -119,24 +119,12 @@ public class OsirisPlusHUD extends Module {
 		this.b_rgb = (color_rgb & 0xFF);
 
 		if (this.setting_side.getValString().equals("LeftUp")) {
-			this.x = 1 + this.save_x;
-			this.y = 1 + this.save_y;
-
 			this.dock = DockValue.HUD_DOCK_LEFT_UP;
 		} else if (this.setting_side.getValString().equals("LeftDown")) {
-			this.x = 1;
-			this.y = this.screen_height - 1 - this.h;
-
 			this.dock = DockValue.HUD_DOCK_LEFT_DOWN;
 		} else if (this.setting_side.getValString().equals("RightUp")) {
-			this.x = this.screen_width - 1 - this.w;
-			this.y = 1;
-
 			this.dock = DockValue.HUD_DOCK_RIGHT_UP;
-		} else if (this.setting_side.getValString().equals("RightDown")) {
-			this.x = this.screen_width - 1 - this.w;
-			this.y = this.screen_height - 1 - this.h;
-		
+		} else if (this.setting_side.getValString().equals("RightDown")) {	
 			this.dock = DockValue.HUD_DOCK_RIGHT_DOWN;
 		}
 
@@ -179,20 +167,24 @@ public class OsirisPlusHUD extends Module {
 		int g = getSettingByID("HUDStringGreen").getValInt();
 		int b = getSettingByID("HUDStringBlue").getValInt();
 
-		TurokString.renderString(string, this.x + verifyDocking(TurokString.getStringWidth(string, this.setting_smooth.getValBoolean()), x), this.y + y, r, g, b, this.setting_shadow.getValBoolean(), this.setting_smooth.getValBoolean());
+		TurokString.renderStringHUD(string, this.x + verifyDocking(getStringWidth(string), x), this.y + y, r, g, b, this.setting_shadow.getValBoolean(), this.setting_smooth.getValBoolean());
 	}
 
 	// Render with the color.
 	protected void renderString(String string, int x, int y, int r, int g, int b) {
-		TurokString.renderString(string, this.x + verifyDocking(TurokString.getStringWidth(string, this.setting_smooth.getValBoolean()), x), this.y + y, r, g, b, this.setting_shadow.getValBoolean(), this.setting_smooth.getValBoolean());
+		TurokString.renderStringHUD(string, this.x + verifyDocking(getStringWidth(string), x), this.y + y, r, g, b, this.setting_shadow.getValBoolean(), this.setting_smooth.getValBoolean());
 	}
 
 	protected int getStringWidth(String string) {
-		return TurokString.getStringWidth(string, this.setting_smooth.getValBoolean());
+		return TurokString.getStringHUDWidth(string, this.setting_smooth.getValBoolean());
 	}
 
 	protected int getStringHeight(String string) {
-		return TurokString.getStringHeight(string, this.setting_smooth.getValBoolean());
+		if (this.setting_smooth.getValBoolean()) {
+			return TurokString.getStringHUDHeight(string, this.setting_smooth.getValBoolean()) + 2;
+		}
+
+		return TurokString.getStringHUDHeight(string, this.setting_smooth.getValBoolean());
 	}
 
 	protected int verifyDocking(int width, int x) {
@@ -247,6 +239,22 @@ public class OsirisPlusHUD extends Module {
 		return false;
 	}
 
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public void setWidth(int width) {
+		this.w = width;
+	}
+
+	public void setHeight(int height) {
+		this.h = height;
+	}
+
 	public String getName() {
 		return this.name;
 	}
@@ -257,6 +265,22 @@ public class OsirisPlusHUD extends Module {
 		}
 
 		return false;
+	}
+
+	public int getX() {
+		return this.x;
+	}
+
+	public int getY() {
+		return this.y;
+	}
+
+	public int getWidth() {
+		return this.w;
+	}
+
+	public int getHeight() {
+		return this.h;
 	}
 
 	public enum DockValue {

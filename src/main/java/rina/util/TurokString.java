@@ -21,8 +21,9 @@ import rina.util.TurokRenderGL;
  *
  **/
 public class TurokString {
-	public static CFontRenderer custom_font  = new CFontRenderer(new Font("Verdana Regular", 0, 16), true, true);
-	public static FontRenderer font_renderer = Minecraft.getMinecraft().fontRenderer;
+	public static CFontRenderer custom_font     = new CFontRenderer(new Font("Tahoma", 0, 16), true, true);
+	public static CFontRenderer custom_font_hud = new CFontRenderer(new Font("Tahoma", 0, 19), true, true);
+	public static FontRenderer font_renderer    = Minecraft.getMinecraft().fontRenderer;
 
 	// Main Render.
 	public static void renderString(String string, int x, int y, int r, int g, int b, boolean shadow, boolean custom) {
@@ -57,6 +58,44 @@ public class TurokString {
 	public static int getStringHeight(String string, boolean custom) {
 		if (custom) {
 			return (int) custom_font.getStringHeight(string);
+		} else {
+			return (int) (font_renderer.FONT_HEIGHT * 1);
+		}
+	}
+
+	// Custom HUD.
+	public static void renderStringHUD(String string, int x, int y, int r, int g, int b, boolean shadow, boolean custom) {
+		TurokRenderGL.prepareToRenderString();
+		TurokRenderGL.color(r, g, b, 255);
+
+		if (custom) {
+			if (shadow) {
+				custom_font_hud.drawStringWithShadow(string, x, y, new TurokColor(r, g, b).hex());
+			} else {
+				custom_font_hud.drawString(string, x, y, new TurokColor(r, g, b).hex());
+			}
+		} else {
+			if (shadow) {
+				font_renderer.drawStringWithShadow(string, x, y, new TurokColor(r, g, b).hex());
+			} else {
+				font_renderer.drawString(string, x, y, new TurokColor(r, g, b).hex());
+			}
+		}
+
+		TurokRenderGL.releaseRenderString();
+	}
+
+	public static int getStringHUDWidth(String string, boolean custom) {
+		if (custom) {
+			return (int) custom_font_hud.getStringWidth(string);
+		} else {
+			return (int) (font_renderer.getStringWidth(string) * 1);
+		}
+	}
+
+	public static int getStringHUDHeight(String string, boolean custom) {
+		if (custom) {
+			return (int) custom_font_hud.getStringHeight(string);
 		} else {
 			return (int) (font_renderer.FONT_HEIGHT * 1);
 		}

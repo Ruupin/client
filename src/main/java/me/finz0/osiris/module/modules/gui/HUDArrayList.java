@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.*;
 
 // Finz0.
+import me.finz0.osiris.module.Module.Category;
 import me.finz0.osiris.module.ModuleManager;
 import me.finz0.osiris.settings.Setting;
 import me.finz0.osiris.module.Module;
@@ -22,6 +23,7 @@ import rina.util.TurokString;
  **/
 public class HUDArrayList extends OsirisPlusHUD {
 	Setting rgb_effect;
+	Setting style_mode;
 
 	List<Module> pretty_modules;
 
@@ -29,6 +31,7 @@ public class HUDArrayList extends OsirisPlusHUD {
 		super("ArrayList", "Show modules enabled.");
 
 		rgb_effect = addSetting(new Setting("RGB", (Module) this, false, "ArrayListHUDRGB"));
+		style_mode = addSetting(new Setting("StyleMode", (Module) this, false, "ArratListStyleMode"));
 
 		pretty_modules = new ArrayList<>();
 
@@ -60,15 +63,31 @@ public class HUDArrayList extends OsirisPlusHUD {
 		int position_update_y = 0;
 
 		for (Module modules : pretty_modules) {
+			if (modules.getCategory() == Category.GUI) {
+				continue;
+			}
+
 			String module_name = (
 				modules.getName() + (modules.getHudInfo().equals("") == true ? "" : gray_color + " [" + reset_color + modules.getHudInfo() + gray_color + "]" + reset_color)
 			);
+
+//			if (style_mode.getValBoolean()) {
+//				rgb_effect.setValBoolean(true);
+
+//				renderString(module_name, 0, position_update_y, r_rgb, g_rgb, b_rgb);
+//			} else {
+//				if (rgb_effect.getValBoolean()) {
+//					renderString(module_name, 0, position_update_y, r_rgb, g_rgb, b_rgb);
+//				} else {
+//				renderString(module_name, 0, position_update_y);
+//				}			
+//			}
 
 			if (rgb_effect.getValBoolean()) {
 				renderString(module_name, 0, position_update_y, r_rgb, g_rgb, b_rgb);
 			} else {
 				renderString(module_name, 0, position_update_y);
-			}
+			}	
 
 			position_update_y += getStringHeight(module_name);
 
