@@ -21,7 +21,7 @@ import rina.util.TurokRenderGL;
  *
  **/
 public class TurokString {
-	public static CFontRenderer custom_font  = new CFontRenderer(new Font("Verdana Regular", 0, 16), true, true);
+	public static CFontRenderer custom_font  = new CFontRenderer(new Font("Tahoma", 0, 16), true, true);
 	public static FontRenderer font_renderer = Minecraft.getMinecraft().fontRenderer;
 
 	// Main Render.
