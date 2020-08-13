@@ -1,17 +1,15 @@
 class BUILD:
-	def __init__(self, version):
-		self.run(version)
+	def __init__(self, version, final):
+		self.run(version, final)
 
-	def run(self, version):
-		final = version;
-
+	def run(self, version, final):
 		import os	
 		#os.system("gradlew setupDecompWorkspace --stop && gradlew clean build")
 		os.system("gradlew runClient --stop && gradlew clean build")
 
 		import shutil
 		try:
-			shutil.copyfile("build/libs/client-" + final + "-release.jar", os.getenv("APPDATA") + "\\.minecraft\\mods\\osiris-" + final + ".jar")
+			shutil.copyfile("build/libs/client-" + version + "-release.jar", os.getenv("APPDATA") + "\\.minecraft\\mods\\" + final + ".jar")
 			os.system("start C:/Users/Public/Desktop/Minecraft_Launcher");
 			print("Finished the build.");
 		except:
@@ -20,4 +18,4 @@ class BUILD:
 		import sys
 		sys.exit()
 
-BUILD("1.6");
+BUILD("2.1", "osiris_plus-2.1");

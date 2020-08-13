@@ -45,11 +45,11 @@ public class OsirisPlusWidgetCombo extends OsirisPlusWidgetAbstract {
 
 	private int save_y;
 
-	private ArrayList<String> list;
-
 	private int index;
 
 	private int height_offset;
+
+	private boolean colapse;
 
 	// Render.
 	public boolean render_button;
@@ -108,17 +108,10 @@ public class OsirisPlusWidgetCombo extends OsirisPlusWidgetAbstract {
 
 		this.event_mouse = false;
 
-		this.list  = new ArrayList<>();
+		int count = 0;
 
-		for (String options : this.setting.getOptions()) {
-			this.list.add(options);
-		}
-
-		for (int i = 0; i < this.list.size(); i++) {
-			if (this.list.get(i).equals(this.setting.getValString())) {
-				this.index = i;
-			}
-		}
+		this.index   = this.setting.getOptions().indexOf(this.setting.getValString());
+		this.colapse = true;
 
 		initColors("Sorry");
 
@@ -222,7 +215,7 @@ public class OsirisPlusWidgetCombo extends OsirisPlusWidgetAbstract {
 	public void click(int x, int y, int mouse) {
 		if (mouse == 0) {
 			if (isMousePassing()) {
-				if ((this.index + 1) >= this.list.size()) {
+				if ((this.index + 1) >= this.setting.getOptions().size()) {
 					this.index = 0;
 				} else {
 					this.index++;
@@ -287,7 +280,12 @@ public class OsirisPlusWidgetCombo extends OsirisPlusWidgetAbstract {
 			this.height_offset = 1;
 		}
 
-		this.setting.setValString(this.list.get(this.index));
+		if (this.colapse) {
+			this.index   = this.setting.getOptions().indexOf(this.setting.getValString());
+			this.colapse = false;
+		}
+
+		this.setting.setValString(this.setting.getOptions().get(this.index));
 
 		if (this.rect.collide(x, y) && this.render_button && this.container.getMaster().cam) {
 			setMousePassing(true);

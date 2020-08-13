@@ -121,6 +121,7 @@ public class ModuleManager {
         addHUD(new HUDArrayList());
         addHUD(new HUDCoordinates());
         addHUD(new HUDGUIWatermark());
+        addHUD(new HUDWatermark());
     }
 
     public static void addMod(Module m){

@@ -48,6 +48,10 @@ public class OsirisPlusHUD extends Module {
 	public int g_rgb;
 	public int b_rgb;
 
+	public int r_hud;
+	public int g_hud;
+	public int b_hud;
+
 	public Setting setting_smooth;
 	public Setting setting_shadow;
 	public Setting setting_side;
@@ -91,6 +95,10 @@ public class OsirisPlusHUD extends Module {
 		this.g_rgb = 0;
 		this.b_rgb = 0;
 
+		this.r_hud = 0;
+		this.g_hud = 0;
+		this.b_hud = 0;
+
 		this.setting_smooth = addSetting(new Setting("Smooth", this, false, this.name + "HUDSmooth"));
 		this.setting_shadow = addSetting(new Setting("Shadow", this, true, this.name + "HUDShadow"));
 	}
@@ -117,6 +125,10 @@ public class OsirisPlusHUD extends Module {
 		this.r_rgb = ((color_rgb >> 16) & 0xFF);
 		this.g_rgb = ((color_rgb >> 8) & 0xFF);
 		this.b_rgb = (color_rgb & 0xFF);
+
+		this.r_hud = getSettingByID("HUDStringRed").getValInt();
+		this.g_hud = getSettingByID("HUDStringGreen").getValInt();
+		this.b_hud = getSettingByID("HUDStringBlue").getValInt();
 
 		if (this.setting_side.getValString().equals("LeftUp")) {
 			this.dock = DockValue.HUD_DOCK_LEFT_UP;
@@ -163,16 +175,27 @@ public class OsirisPlusHUD extends Module {
 
 	// We render string default no color.
 	protected void renderString(String string, int x, int y) {
-		int r = getSettingByID("HUDStringRed").getValInt();
-		int g = getSettingByID("HUDStringGreen").getValInt();
-		int b = getSettingByID("HUDStringBlue").getValInt();
-
-		TurokString.renderStringHUD(string, this.x + verifyDocking(getStringWidth(string), x), this.y + y, r, g, b, this.setting_shadow.getValBoolean(), this.setting_smooth.getValBoolean());
+		TurokString.renderStringHUD(string, this.x + verifyDocking(getStringWidth(string), x), this.y + y, this.r_hud, this.g_hud, this.b_hud, this.setting_shadow.getValBoolean(), this.setting_smooth.getValBoolean());
 	}
 
 	// Render with the color.
 	protected void renderString(String string, int x, int y, int r, int g, int b) {
 		TurokString.renderStringHUD(string, this.x + verifyDocking(getStringWidth(string), x), this.y + y, r, g, b, this.setting_shadow.getValBoolean(), this.setting_smooth.getValBoolean());
+	}
+
+	protected void drawOutlineRect(float x, float y, float width, float height, int r, int g, int b, int a) {
+		TurokRenderGL.color(r, g, b, a);
+		TurokRenderGL.drawOutlineRect(this.x + x, this.y + y, this.x + x + width, this.y + y + height);
+	}
+
+	protected void drawSolidRect(float x, float y, float width, float height, int r, int g, int b, int a) {
+		TurokRenderGL.color(r, g, b, a);
+		TurokRenderGL.drawSolidRect(this.x + x, this.y + y, this.x + x + width, this.y + y + height);
+	}
+
+	protected void drawSpecifySolidRect(float x, float y, float width, float height, int r, int g, int b, int a) {
+		TurokRenderGL.color(r, g, b, a);
+		TurokRenderGL.drawSolidRect(x, y, x + width,  y + height);
 	}
 
 	protected int getStringWidth(String string) {

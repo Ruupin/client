@@ -23,15 +23,24 @@ import rina.util.TurokString;
  **/
 public class HUDArrayList extends OsirisPlusHUD {
 	Setting rgb_effect;
-	Setting style_mode;
+	Setting hud_info_separator;
+	Setting dock_separator;
+	Setting module_separator;
 
 	List<Module> pretty_modules;
+
+	int offset_x_dock;
+	int offset_x_dock_background;
+
+	boolean rendering_background;
 
 	public HUDArrayList() {
 		super("ArrayList", "Show modules enabled.");
 
-		rgb_effect = addSetting(new Setting("RGB", (Module) this, false, "ArrayListHUDRGB"));
-		style_mode = addSetting(new Setting("StyleMode", (Module) this, false, "ArratListStyleMode"));
+		rgb_effect         = addSetting(new Setting("RGB", (Module) this, true, "ArrayListHUDRGB"));
+		hud_info_separator = addSetting(new Setting("Module[HUDInfo]", this, false, "ArrayListHUDModuleHUDInfo"));
+		dock_separator     = addSetting(new Setting("|Dock", (Module) this, true, "ArrayListHUDDockSeparator"));
+		module_separator   = addSetting(new Setting("Module|", (Module) this, false, "ArrayListHUDModuleSeparator"));
 
 		pretty_modules = new ArrayList<>();
 
@@ -60,6 +69,41 @@ public class HUDArrayList extends OsirisPlusHUD {
 			pretty_modules = ModuleManager.getModules().stream().filter(module -> module.isEnabled()).sorted(Comparator.comparing(module -> getStringWidth(module.getName() + (module.getHudInfo().equals("") == true ? "" : gray_color + " [" + reset_color + module.getHudInfo() + gray_color + "]" + reset_color)))).collect(Collectors.toList());
 		}
 
+		if (dock_separator.getValBoolean()) {
+			if (isDockIn("LeftUp") || isDockIn("LeftDown")) {
+				if (rgb_effect.getValBoolean()) {
+					drawSolidRect(0, 0, 1, this.h, r_rgb, g_rgb, b_rgb, 255);
+				} else {
+					drawSolidRect(0, 0, 1, this.h, r_hud, g_hud, b_hud, 255);
+				}
+
+				offset_x_dock            = 2;
+				offset_x_dock_background = 1;
+			} else if (isDockIn("RightUp") || isDockIn("RightDown")) {
+				if (rgb_effect.getValBoolean()) {
+					drawSolidRect(this.w - 1, 0, 1, this.h, r_rgb, g_rgb, b_rgb, 255);
+				} else {
+					drawSolidRect(this.w - 1, 0, 1, this.h, r_hud, g_hud, b_hud, 255);
+				}
+
+				offset_x_dock            = 3;
+				offset_x_dock_background = 2;
+			}
+		} else {
+			if (module_separator.getValBoolean()) {
+				if (isDockIn("LeftUp") || isDockIn("LeftDown")) {
+					offset_x_dock            = 2;
+					offset_x_dock_background = 1;
+				} else if (isDockIn("RightUp") || isDockIn("RightDown")) {
+					offset_x_dock            = 3;
+					offset_x_dock_background = 2;
+				}
+			} else {
+				offset_x_dock            = 0;
+				offset_x_dock_background = 0;
+			}
+		}
+
 		int position_update_y = 0;
 
 		for (Module modules : pretty_modules) {
@@ -68,26 +112,51 @@ public class HUDArrayList extends OsirisPlusHUD {
 			}
 
 			String module_name = (
-				modules.getName() + (modules.getHudInfo().equals("") == true ? "" : gray_color + " [" + reset_color + modules.getHudInfo() + gray_color + "]" + reset_color)
+				hud_info_separator.getValBoolean() == true ? (modules.getName() + (modules.getHudInfo().equals("") == true ? "" : gray_color + " [" + reset_color + modules.getHudInfo() + gray_color + "]" + reset_color)) :
+				modules.getName() + (modules.getHudInfo().equals("") == true ? "" : gray_color + " " + modules.getHudInfo())
 			);
 
-//			if (style_mode.getValBoolean()) {
-//				rgb_effect.setValBoolean(true);
+			if (dock_separator.getValBoolean()) {
+				if (isDockIn("LeftUp") || isDockIn("LeftDown")) {
+					drawSolidRect(offset_x_dock_background, position_update_y, getStringWidth(module_name) + offset_x_dock + offset_x_dock_background, getStringHeight(module_name), 0, 0, 0, 100);
+				} else if (isDockIn("RightUp") || isDockIn("RightDown")) {
+					drawSolidRect(verifyDocking(getStringWidth(module_name), offset_x_dock_background) - 2, position_update_y, getStringWidth(module_name) + offset_x_dock + 1, getStringHeight(module_name), 0, 0, 0, 100);
+				}
 
-//				renderString(module_name, 0, position_update_y, r_rgb, g_rgb, b_rgb);
-//			} else {
-//				if (rgb_effect.getValBoolean()) {
-//					renderString(module_name, 0, position_update_y, r_rgb, g_rgb, b_rgb);
-//				} else {
-//				renderString(module_name, 0, position_update_y);
-//				}			
-//			}
+				rendering_background = true;
+			} else {
+				rendering_background = false;
+			}
+
+			if (module_separator.getValBoolean()) {
+				if (isDockIn("LeftUp") || isDockIn("LeftDown")) {
+					if (!rendering_background) {
+						drawSolidRect(offset_x_dock_background, position_update_y, getStringWidth(module_name) + offset_x_dock + offset_x_dock_background, getStringHeight(module_name), 0, 0, 0, 100);
+					}
+
+					if (rgb_effect.getValBoolean()) {
+						drawSolidRect(getStringWidth(module_name) + offset_x_dock + 2, position_update_y, 1, getStringHeight(module_name), r_rgb, g_rgb, b_rgb, 255);
+					} else {
+						drawSolidRect(getStringWidth(module_name) + offset_x_dock + 2, position_update_y, 1, getStringHeight(module_name), r_hud, g_hud, b_hud, 255);
+					}
+				} else if (isDockIn("RightUp") || isDockIn("RightDown")) {
+					if (!rendering_background) {
+						drawSolidRect(verifyDocking(getStringWidth(module_name), offset_x_dock_background) - 2, position_update_y, getStringWidth(module_name) + offset_x_dock + 1, getStringHeight(module_name), 0, 0, 0, 100);
+					}
+
+					if (rgb_effect.getValBoolean()) {
+						drawSolidRect(verifyDocking(getStringWidth(module_name), offset_x_dock_background) - 3, position_update_y, 1, getStringHeight(module_name), r_rgb, g_rgb, b_rgb, 255);
+					} else {
+						drawSolidRect(verifyDocking(getStringWidth(module_name), offset_x_dock_background) - 3, position_update_y, 1, getStringHeight(module_name), r_hud, g_hud, b_hud, 255);
+					}
+				}
+			}
 
 			if (rgb_effect.getValBoolean()) {
-				renderString(module_name, 0, position_update_y, r_rgb, g_rgb, b_rgb);
+				renderString(module_name, offset_x_dock, position_update_y, r_rgb, g_rgb, b_rgb);
 			} else {
-				renderString(module_name, 0, position_update_y);
-			}	
+				renderString(module_name, offset_x_dock, position_update_y);
+			};
 
 			position_update_y += getStringHeight(module_name);
 

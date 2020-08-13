@@ -94,6 +94,6 @@ public class AutoTotem extends Module {
 
     @Override
     public String getHudInfo() {
-        return String.valueOf("\u00A78[\u00A7r"+totems+"\u00A78]");
+        return String.valueOf(totems);
     }
 }

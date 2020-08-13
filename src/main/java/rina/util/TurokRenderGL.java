@@ -48,11 +48,15 @@ public class TurokRenderGL {
 		GL11.glEnd();
 	}
 
+	public static void drawOutlineRect(int x, int y, int width, int height) {
+		drawOutlineRect((float) x, (float) y, (float) width, (float) height);
+	}
+
 	public static void drawOutlineRect(TurokRect rect) {
 		drawOutlineRect((float) rect.x, (float) rect.y, (float) (rect.x + rect.width), (float) (rect.y + rect.height));
 	}
 
-	public static void drawSolidRect(int x, int y, int width, int height) {
+	public static void drawSolidRect(float x, float y, float width, float height) {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
@@ -67,8 +71,12 @@ public class TurokRenderGL {
 		GL11.glEnd();
 	}
 
+	public static void drawSolidRect(int x, int y, int width, int height) {
+		drawSolidRect((float) x, (float) y, (float) width, (float) height);
+	}
+
 	public static void drawSolidRect(TurokRect rect) {
-		drawSolidRect(rect.x, rect.y, rect.x + rect.width, rect.y + rect.height);
+		drawSolidRect((float) rect.x, (float) rect.y, (float) (rect.x + rect.width), (float) (rect.y + rect.height));
 	}
 
 	public static void prepareToRenderString() {

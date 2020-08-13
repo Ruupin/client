@@ -447,5 +447,4 @@ public class OsirisPlusWidgetContainer {
 		this.button_pressed_b = OsirisMod.getInstance().settingsManager.getSettingByID("GUIButtonPressedB").getValInt();
 		this.button_pressed_a = OsirisMod.getInstance().settingsManager.getSettingByID("GUIButtonPressedA").getValInt();
 	}
-
 }
