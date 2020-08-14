@@ -21,6 +21,6 @@ You can also run `blablabla.bat` and `autobuild.bat` in that order.
 ### Linux
 
 First, open terminal. Run `cd "<insert name where you downloaded the source code>"`. 
-Next, run `./gradlew setupDecompWorkspace`, and then run `./gradlew.bat build`. 
+Next, run `./gradlew setupDecompWorkspace`, and then run `./gradlew build`. 
 
 The build output is in `build/libs` and ends in `-release.jar`. 
