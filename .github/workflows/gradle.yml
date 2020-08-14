@@ -26,3 +26,7 @@ jobs:
       run: ./gradlew setupDecompWorkspace
     - name: Build with Gradle
       run: ./gradlew build
+    - uses: actions/upload-artifact@v2
+      with:
+        name: uploud
+        path: build/libs
