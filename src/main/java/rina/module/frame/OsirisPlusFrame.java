@@ -27,6 +27,9 @@ import me.finz0.osiris.module.ModuleManager;
 import me.finz0.osiris.module.Module;
 import me.finz0.osiris.OsirisMod;
 
+// HUD.
+import me.finz0.osiris.module.modules.gui.OsirisPlusHUDModule;
+
 /**
  * @author Rina!
  *
@@ -386,8 +389,32 @@ public class OsirisPlusFrame {
 		}
 
 		if (mouse == 0) {
-			if (getRect().collide(x, y) && isAbleToDrag()) {
+			if (isAbleToDrag()) {
 				setDragging(false);
+			}
+		}
+	}
+
+	public void clickHUD(int x, int y, int mouse) {
+		for (OsirisPlusWidgetMButton mbuttons : this.modules_button) {
+			if (mbuttons.getModule().getName().equals("HUD")) {
+				((OsirisPlusHUDModule) mbuttons.getModule()).click(x, y, mouse);
+			}
+		}
+	}
+
+	public void releaseHUD(int x, int y, int mouse) {
+		for (OsirisPlusWidgetMButton mbuttons : this.modules_button) {
+			if (mbuttons.getModule().getName().equals("HUD")) {
+				((OsirisPlusHUDModule) mbuttons.getModule()).release(x, y, mouse);
+			}
+		}
+	}
+
+	public void updateHUD(int x, int y) {
+		for (OsirisPlusWidgetMButton mbuttons : this.modules_button) {
+			if (mbuttons.getModule().getName().equals("HUD")) {
+				((OsirisPlusHUDModule) mbuttons.getModule()).update(x, y);
 			}
 		}
 	}

@@ -30,6 +30,8 @@ public class OsirisPlusHUDModule extends Module {
 	ArrayList<OsirisPlusHUD> HUD_DOCK_RIGHT_UP;
 	ArrayList<OsirisPlusHUD> HUD_DOCK_RIGHT_DOWN;
 
+	Setting hud_editor;
+
 	// New event.
 	int off_set_chat = 0;
 
@@ -40,6 +42,7 @@ public class OsirisPlusHUDModule extends Module {
 		OsirisMod.getInstance().settingsManager.rSetting(new Setting("Red", this, 255, 0, 255, true, "HUDStringRed"));
 		OsirisMod.getInstance().settingsManager.rSetting(new Setting("Green", this, 255, 0, 255, true, "HUDStringGreen"));
 		OsirisMod.getInstance().settingsManager.rSetting(new Setting("Blue", this, 255, 0, 255, true, "HUDStringBlue"));
+		OsirisMod.getInstance().settingsManager.rSetting(hud_editor = new Setting("HudEditor", this, false, "HUDEditor"));
 
 		this.HUD_DOCK_LEFT_UP    = new ArrayList<>();
 		this.HUD_DOCK_LEFT_DOWN  = new ArrayList<>();
@@ -49,6 +52,18 @@ public class OsirisPlusHUDModule extends Module {
 
 	@Override
 	public void onUpdate() {
+		if (hud_editor.getValBoolean()) {
+			OsirisMod.getInstance().guiscreen_modules.mode = false;
+
+			if (OsirisMod.getInstance().guiscreen_modules.mode == true) {
+				hud_editor.setValBoolean(false);
+			} else {
+				OsirisMod.getInstance().guiscreen_modules.mode = false;
+			}
+		} else {
+			OsirisMod.getInstance().guiscreen_modules.mode = true;
+		}
+
 		ScaledResolution scl_minecraft_screen = new ScaledResolution(mc);
 
 		int scr_width  = scl_minecraft_screen.getScaledWidth();
@@ -97,6 +112,10 @@ public class OsirisPlusHUDModule extends Module {
 		int y_dock_left_up = 1;
 
 		for (OsirisPlusHUD huds : this.HUD_DOCK_LEFT_UP) {
+			if (huds.isCustom()) {
+				continue;
+			}			
+
 			huds.setX(1);
 			huds.setY(y_dock_left_up);
 
@@ -106,6 +125,10 @@ public class OsirisPlusHUDModule extends Module {
 		int y_dock_left_down = scr_height - 1 - off_set_chat;
 
 		for (OsirisPlusHUD huds : this.HUD_DOCK_LEFT_DOWN) {
+			if (huds.isCustom()) {
+				continue;
+			}
+
 			huds.setX(1);
 			huds.setY(y_dock_left_down - huds.getHeight());
 
@@ -115,6 +138,10 @@ public class OsirisPlusHUDModule extends Module {
 		int y_dock_right_up = 1;
 
 		for (OsirisPlusHUD huds : this.HUD_DOCK_RIGHT_UP) {
+			if (huds.isCustom()) {
+				continue;
+			}
+
 			huds.setX(scr_width -huds.getWidth() - 1);
 			huds.setY(y_dock_right_up);
 
@@ -124,6 +151,10 @@ public class OsirisPlusHUDModule extends Module {
 		int y_dock_right_down = scr_height - 1 - off_set_chat;
 
 		for (OsirisPlusHUD huds : this.HUD_DOCK_RIGHT_DOWN) {
+			if (huds.isCustom()) {
+				continue;
+			}
+
 			huds.setX(scr_width - huds.getWidth() - 1);
 			huds.setY(y_dock_right_down - huds.getHeight());
 
@@ -185,5 +216,29 @@ public class OsirisPlusHUDModule extends Module {
 		}
 
 		return hud_requested;
+	}
+
+	public void click(int x, int y, int mouse) {
+		for (OsirisPlusHUD huds : ModuleManager.getHUDList()) {
+			if (!OsirisMod.getInstance().guiscreen_modules.mode) {
+				huds.click(x, y, mouse);
+			}
+		}
+	}
+
+	public void release(int x, int y, int mouse) {
+		for (OsirisPlusHUD huds : ModuleManager.getHUDList()) {
+			if (!OsirisMod.getInstance().guiscreen_modules.mode) {
+				huds.release(x, y, mouse);
+			}
+		}
+	}
+
+	public void update(int x, int y) {
+		for (OsirisPlusHUD huds : ModuleManager.getHUDList()) {
+			if (!OsirisMod.getInstance().guiscreen_modules.mode) {
+				huds.update(x, y);
+			}
+		}
 	}
 }

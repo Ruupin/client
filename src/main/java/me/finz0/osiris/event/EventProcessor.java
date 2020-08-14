@@ -12,6 +12,7 @@ import me.finz0.osiris.module.modules.render.ShulkerPreview;
 import me.finz0.osiris.module.modules.render.TabGui;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
+import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
@@ -96,8 +97,17 @@ public class EventProcessor {
 
     @SubscribeEvent
     public void onRender(RenderGameOverlayEvent.Post event) {
-        OsirisMod.EVENT_BUS.post(event);
-        if(event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
+        if (event.isCanceled()) {
+            return;
+        }
+
+        RenderGameOverlayEvent.ElementType target = RenderGameOverlayEvent.ElementType.EXPERIENCE;
+
+        if (!mc.player.isCreative() && mc.player.getRidingEntity() instanceof AbstractHorse) {
+            target = RenderGameOverlayEvent.ElementType.HEALTHMOUNT;
+        }
+
+        if (event.getType() == target) {
             //module onRender
             ModuleManager.onRender();
         }

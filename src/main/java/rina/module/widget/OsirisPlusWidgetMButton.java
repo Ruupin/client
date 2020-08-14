@@ -201,6 +201,10 @@ public class OsirisPlusWidgetMButton {
 		this.event_mouse_passing = value;
 	}
 
+	public Module getModule() {
+		return this.module;
+	}
+
 	public OsirisPlusFrame getMaster() {
 		return this.master;
 	}

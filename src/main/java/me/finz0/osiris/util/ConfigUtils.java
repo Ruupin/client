@@ -35,6 +35,7 @@ import java.util.Iterator;
 // Rina.
 import rina.module.frame.OsirisPlusFrame;
 import rina.module.OsirisPlusGUI;
+import rina.hud.OsirisPlusHUD;
 
 public class ConfigUtils {
     Minecraft mc = Minecraft.getMinecraft();
@@ -58,6 +59,7 @@ public class ConfigUtils {
         loadBinds();
         loadFriends();
         loadGui();
+        loadHudCustom();
         loadPrefix();
         loadRainbow();
         loadMacros();
@@ -464,6 +466,58 @@ public class ConfigUtils {
                     frames.setX((int) x1);
                     frames.setY((int) y1);
                     frames.setOpenDefault(open);
+                }
+            }
+
+            br.close();
+        } catch (Exception var17) {
+            var17.printStackTrace();
+            //this.saveGui();
+        }
+
+    }
+
+    public void saveHudCustom() {
+        try {
+            File file = new File(this.Osiris.getAbsolutePath(), "Hud.txt");
+            BufferedWriter out = new BufferedWriter(new FileWriter(file));
+            Iterator var3 = OsirisMod.getInstance().moduleManager.getHUDList().iterator();
+
+            while(var3.hasNext()) {
+                OsirisPlusHUD hud = (OsirisPlusHUD) var3.next();
+                out.write(hud.getName() + ":" + hud.getX() + ":" + hud.getY() + ":" + hud.isCustom());
+                out.write("\r\n");
+            }
+
+            out.close();
+        } catch (Exception var5) {
+        }
+
+    }
+
+    public void loadHudCustom() {
+        try {
+            File file = new File(this.Osiris.getAbsolutePath(), "Hud.txt");
+            FileInputStream fstream = new FileInputStream(file.getAbsolutePath());
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+            String line;
+            while((line = br.readLine()) != null) {
+                String curLine = line.trim();
+                String name = curLine.split(":")[0];
+                String x = curLine.split(":")[1];
+                String y = curLine.split(":")[2];
+                String c = curLine.split(":")[3];
+                double x1 = Double.parseDouble(x);
+                double y1 = Double.parseDouble(y);
+                boolean custom = Boolean.parseBoolean(c);
+                OsirisPlusHUD huds = OsirisMod.getInstance().moduleManager.getHUDByName(name);
+
+                if (huds != null) {
+                    huds.setX((int) x1);
+                    huds.setY((int) y1);
+                    huds.custom_xy = custom;
                 }
             }
 

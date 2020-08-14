@@ -122,6 +122,7 @@ public class ModuleManager {
         addHUD(new HUDCoordinates());
         addHUD(new HUDGUIWatermark());
         addHUD(new HUDWatermark());
+        addHUD(new HUDInventory());
     }
 
     public static void addMod(Module m){
@@ -203,6 +204,20 @@ public class ModuleManager {
                 module.toggle();
             }
         });
+    }
+
+    public static OsirisPlusHUD getHUDByName(String name) {
+        OsirisPlusHUD hud_requested = null;
+
+        for (OsirisPlusHUD huds : getHUDList()) {
+            if (huds.getName().equals(name)) {
+                hud_requested = huds;
+
+                break;
+            }
+        }
+
+        return hud_requested;
     }
 
     public static Module getModuleByName(String name){

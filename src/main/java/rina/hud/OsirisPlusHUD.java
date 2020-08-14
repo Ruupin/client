@@ -35,8 +35,8 @@ public class OsirisPlusHUD extends Module {
 	public int x;
 	public int y;
 
-	public int save_x;
-	public int save_y;
+	public int move_x;
+	public int move_y;
 
 	public int w;
 	public int h;
@@ -54,6 +54,7 @@ public class OsirisPlusHUD extends Module {
 
 	public Setting setting_smooth;
 	public Setting setting_shadow;
+	public Setting setting_custom;
 	public Setting setting_side;
 
 	public DockValue dock;
@@ -77,6 +78,11 @@ public class OsirisPlusHUD extends Module {
 	public ChatFormatting dark_purple        = ChatFormatting.DARK_PURPLE;
 	public ChatFormatting light_purple_color = ChatFormatting.LIGHT_PURPLE;
 
+	// Events.
+	public boolean custom_xy;
+	public boolean event_passing;
+	public boolean event_dragging;
+
 	public OsirisPlusHUD(String name, String description) {
 		super(name, Category.GUI, description);
 
@@ -88,8 +94,8 @@ public class OsirisPlusHUD extends Module {
 		this.screen_width  = 0;
 		this.screen_height = 0;
 
-		this.save_x = 0;
-		this.save_y = 0;
+		this.move_x = 0;
+		this.move_y = 0;
 
 		this.r_rgb = 0;
 		this.g_rgb = 0;
@@ -101,6 +107,11 @@ public class OsirisPlusHUD extends Module {
 
 		this.setting_smooth = addSetting(new Setting("Smooth", this, false, this.name + "HUDSmooth"));
 		this.setting_shadow = addSetting(new Setting("Shadow", this, true, this.name + "HUDShadow"));
+		this.setting_custom = addSetting(new Setting("Custom", this, false, this.name + "HUDCustom"));
+
+		this.custom_xy      = false;
+		this.event_passing  = false;
+		this.event_dragging = false;
 	}
 
 	public void releaseHUDAsModule() {
@@ -136,12 +147,18 @@ public class OsirisPlusHUD extends Module {
 			this.dock = DockValue.HUD_DOCK_LEFT_DOWN;
 		} else if (this.setting_side.getValString().equals("RightUp")) {
 			this.dock = DockValue.HUD_DOCK_RIGHT_UP;
-		} else if (this.setting_side.getValString().equals("RightDown")) {	
+		} else if (this.setting_side.getValString().equals("RightDown")) {
 			this.dock = DockValue.HUD_DOCK_RIGHT_DOWN;
 		}
 
+		this.custom_xy = this.setting_custom.getValBoolean();
+
 		if (getModuleByDisplayName("HUD").isEnabled()) {
 			onRenderHUD();
+
+			if (isPassing()) {
+				drawOutlineRect(0, 0, this.w, this.h, 0, 0, 0, 200);
+			}
 		}
 
 		// Prepare to render.
@@ -262,6 +279,76 @@ public class OsirisPlusHUD extends Module {
 		return false;
 	}
 
+	public boolean isCustom() {
+		return this.custom_xy;
+	}
+
+	public boolean isPassing() {
+		return this.event_passing;
+	}
+
+	public boolean isDragging() {
+		return this.event_dragging;
+	}
+
+	public void click(int x, int y, int mouse) {
+		if (verifyClick(x, y) && mouse == 0) {
+			this.event_dragging = true;
+
+			this.move_x = x - this.x;
+			this.move_y = y - this.y;
+		}
+	}
+
+	public void release(int x, int y, int mouse) {
+		if (mouse == 0) {
+			if (isDragging()) {
+				this.event_dragging = false;
+			}
+		}
+	}
+
+	public void update(int x, int y) {
+		if (verifyClick(x, y) && isCustom()) {
+			this.event_passing = true;
+		} else {
+			this.event_passing = false;
+		}
+
+		if (isDragging() && isCustom()) {
+			this.x = x - this.move_x;
+			this.y = y - this.move_y;
+		}
+
+		if (isCustom()) {
+			if (this.x + (this.w / 2) <= (this.screen_width / 2) && this.y + (this.h / 2) <= (this.screen_height / 2)) {
+				this.setting_side.setValString("LeftUp");
+			} else if (this.x + (this.w / 2) <= (this.screen_width / 2) && this.y + (this.h / 2) >= (this.screen_height / 2)) {
+				this.setting_side.setValString("LeftDown");
+			} else if (this.x + (this.w / 2) >= (this.screen_width / 2) && this.y + (this.h / 2) <= (this.screen_height / 2)) {
+				this.setting_side.setValString("RightUp");
+			} else if (this.x + (this.w / 2) >= (this.screen_width / 2) && this.y + (this.h / 2) >= (this.screen_height / 2)) {
+				this.setting_side.setValString("RightDown");
+			}
+
+			if (this.x <= 0) {
+				this.x = 1;
+			}
+
+			if (this.x + this.w >= this.screen_width) {
+				this.x = (this.screen_width - this.w - 1);
+			}
+
+			if (this.y <= 0) {
+				this.y = 1;
+			}
+
+			if (this.y + this.h >= this.screen_height) {
+				this.y = (this.screen_height - this.h - 1);
+			}
+		}
+	}
+
 	public void setX(int x) {
 		this.x = x;
 	}
@@ -280,6 +367,14 @@ public class OsirisPlusHUD extends Module {
 
 	public String getName() {
 		return this.name;
+	}
+
+	public boolean verifyClick(int x, int y) {
+		if (x >= this.x && y >= this.y && x <= this.x + this.w && y <= this.y + this.h) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean collide(OsirisPlusHUD hud) {
