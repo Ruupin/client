@@ -30,6 +30,7 @@ import rina.util.TurokRect;
 
 // Finz0.
 import me.finz0.osiris.module.Module.Category;
+import me.finz0.osiris.module.ModuleManager;
 import me.finz0.osiris.OsirisMod;
 
 /**
@@ -105,7 +106,7 @@ public class OsirisPlusGUI extends GuiScreen {
 			this.frame_gui.keyboard(char_, key);
 
 			if (key == Keyboard.KEY_ESCAPE && !isBinding()) {
-				OsirisMod.getInstance().settingsManager.getSettingByID("HUDEditor").setValBoolean(false);
+				ModuleManager.getModuleByName("HUDEditor").toggle();
 
 				Minecraft.getMinecraft().displayGuiScreen(null);
 			}

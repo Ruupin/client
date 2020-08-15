@@ -3,6 +3,10 @@ package rina.util;
 // Minecraft.
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+
+// Java.
+import java.awt.*;
 
 /**
  * @author Rina!
@@ -19,5 +23,23 @@ public class TurokScreenUtil {
 
 	public static int getScreenHeight() {
 		return scl_minecraft_screen.getScaledHeight();
+	}
+
+	public static void drawGUIRect(int x, int y, int w, int h, int r, int g, int b, int a) {
+		Gui.drawRect(x, y, w, h, new TurokColor(r, g, b, a).hex());
+	}
+
+	public static class TurokColor extends Color {
+		public TurokColor(int r, int g, int b, int a) {
+			super(r, g, b, a);
+		}
+
+		public TurokColor(int r, int g, int b) {
+			super(r, g, b);
+		}
+
+		public int hex() {
+			return getRGB();
+		}
 	}
 }

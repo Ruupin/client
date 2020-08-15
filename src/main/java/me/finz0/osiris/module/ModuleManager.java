@@ -116,6 +116,7 @@ public class ModuleManager {
         // Gui.
         addMod(new OsirisPlusGUIModule());
         addMod(new OsirisPlusHUDModule());
+        addMod(new OsirisPlusHUDEditor());
 
         // HUD.
         addHUD(new HUDArrayList());
@@ -123,6 +124,11 @@ public class ModuleManager {
         addHUD(new HUDGUIWatermark());
         addHUD(new HUDWatermark());
         addHUD(new HUDInventory());
+        addHUD(new HUDArmor());
+        addHUD(new HUDTotem());
+        addHUD(new HUDGoldenApple());
+        addHUD(new HUDExperienceBottle());
+        addHUD(new HUDCrystal());
     }
 
     public static void addMod(Module m){

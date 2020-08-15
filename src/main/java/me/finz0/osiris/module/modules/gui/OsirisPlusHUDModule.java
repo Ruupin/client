@@ -30,8 +30,6 @@ public class OsirisPlusHUDModule extends Module {
 	ArrayList<OsirisPlusHUD> HUD_DOCK_RIGHT_UP;
 	ArrayList<OsirisPlusHUD> HUD_DOCK_RIGHT_DOWN;
 
-	Setting hud_editor;
-
 	// New event.
 	int off_set_chat = 0;
 
@@ -42,7 +40,6 @@ public class OsirisPlusHUDModule extends Module {
 		OsirisMod.getInstance().settingsManager.rSetting(new Setting("Red", this, 255, 0, 255, true, "HUDStringRed"));
 		OsirisMod.getInstance().settingsManager.rSetting(new Setting("Green", this, 255, 0, 255, true, "HUDStringGreen"));
 		OsirisMod.getInstance().settingsManager.rSetting(new Setting("Blue", this, 255, 0, 255, true, "HUDStringBlue"));
-		OsirisMod.getInstance().settingsManager.rSetting(hud_editor = new Setting("HudEditor", this, false, "HUDEditor"));
 
 		this.HUD_DOCK_LEFT_UP    = new ArrayList<>();
 		this.HUD_DOCK_LEFT_DOWN  = new ArrayList<>();
@@ -52,18 +49,6 @@ public class OsirisPlusHUDModule extends Module {
 
 	@Override
 	public void onUpdate() {
-		if (hud_editor.getValBoolean()) {
-			OsirisMod.getInstance().guiscreen_modules.mode = false;
-
-			if (OsirisMod.getInstance().guiscreen_modules.mode == true) {
-				hud_editor.setValBoolean(false);
-			} else {
-				OsirisMod.getInstance().guiscreen_modules.mode = false;
-			}
-		} else {
-			OsirisMod.getInstance().guiscreen_modules.mode = true;
-		}
-
 		ScaledResolution scl_minecraft_screen = new ScaledResolution(mc);
 
 		int scr_width  = scl_minecraft_screen.getScaledWidth();

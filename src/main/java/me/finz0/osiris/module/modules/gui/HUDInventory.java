@@ -40,18 +40,18 @@ public class HUDInventory extends OsirisPlusHUD {
 	@Override
 	public void onRenderHUD() {
 		if (mc.player != null) {
-			drawSolidRect(0, 0, this.w, this.h, 0, 0, 0, background_alpha.getValInt());
-			
-			GlStateManager.pushMatrix();
-			RenderHelper.enableGUIStandardItemLighting();
+			drawGUIRect(0, 0, this.w, this.h, 0, 0, 0, background_alpha.getValInt());
 
 			this.w = 16 * 9;
 			this.h = 16 * 3;
 
+			GlStateManager.pushMatrix();
+			RenderHelper.enableGUIStandardItemLighting();
+
 			for (int i = 0; i < 27; i++) {
 				ItemStack item_stack = mc.player.inventory.mainInventory.get(i + 9);
 
-				int item_position_x = (int) this.x + (i % 9) * 16;
+				int item_position_x = (int) this.x - 2 + (i % 9) * 16;
 				int item_position_y = (int) this.y + (i / 9) * 16;
 
 				mc.getRenderItem().renderItemAndEffectIntoGUI(item_stack, item_position_x, item_position_y);

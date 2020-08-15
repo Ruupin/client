@@ -1,8 +1,12 @@
 package rina.hud;
 
 // Minecraft.
+import net.minecraft.client.renderer.GlStateManager;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.client.gui.ScaledResolution;
+
+// OpenGL.
+import org.lwjgl.opengl.GL11;
 
 // Util.
 import rina.util.TurokScreenUtil;
@@ -153,10 +157,12 @@ public class OsirisPlusHUD extends Module {
 
 		this.custom_xy = this.setting_custom.getValBoolean();
 
+		TurokRenderGL.fixScreen(screen_width, screen_height);
+
 		if (getModuleByDisplayName("HUD").isEnabled()) {
 			onRenderHUD();
 
-			if (isPassing()) {
+			if (isPassing() && !OsirisMod.getInstance().guiscreen_modules.mode) {
 				drawOutlineRect(0, 0, this.w, this.h, 0, 0, 0, 200);
 			}
 		}
@@ -201,13 +207,33 @@ public class OsirisPlusHUD extends Module {
 	}
 
 	protected void drawOutlineRect(float x, float y, float width, float height, int r, int g, int b, int a) {
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+
 		TurokRenderGL.color(r, g, b, a);
 		TurokRenderGL.drawOutlineRect(this.x + x, this.y + y, this.x + x + width, this.y + y + height);
+	
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL11.GL_BLEND);
+
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GlStateManager.color(1, 1, 1);
 	}
 
 	protected void drawSolidRect(float x, float y, float width, float height, int r, int g, int b, int a) {
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+
 		TurokRenderGL.color(r, g, b, a);
 		TurokRenderGL.drawSolidRect(this.x + x, this.y + y, this.x + x + width, this.y + y + height);
+	
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL11.GL_BLEND);
+
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GlStateManager.color(1, 1, 1);
+	}
+
+	protected void drawGUIRect(int x, int y, int width, int height, int r, int g, int b, int a) {
+		TurokScreenUtil.drawGUIRect(this.x + x, this.y + y, this.x + x + width, this.y + y + height, r, g, b, a);
 	}
 
 	protected void drawSpecifySolidRect(float x, float y, float width, float height, int r, int g, int b, int a) {

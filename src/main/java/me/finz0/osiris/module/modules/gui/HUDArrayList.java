@@ -72,18 +72,18 @@ public class HUDArrayList extends OsirisPlusHUD {
 		if (dock_separator.getValBoolean()) {
 			if (isDockIn("LeftUp") || isDockIn("LeftDown")) {
 				if (rgb_effect.getValBoolean()) {
-					drawSolidRect(0, 0, 1, this.h, r_rgb, g_rgb, b_rgb, 255);
+					drawGUIRect(0, 0, 1, this.h, r_rgb, g_rgb, b_rgb, 255);
 				} else {
-					drawSolidRect(0, 0, 1, this.h, r_hud, g_hud, b_hud, 255);
+					drawGUIRect(0, 0, 1, this.h, r_hud, g_hud, b_hud, 255);
 				}
 
 				offset_x_dock            = 2;
 				offset_x_dock_background = 1;
 			} else if (isDockIn("RightUp") || isDockIn("RightDown")) {
 				if (rgb_effect.getValBoolean()) {
-					drawSolidRect(this.w - 1, 0, 1, this.h, r_rgb, g_rgb, b_rgb, 255);
+					drawGUIRect(this.w - 1, 0, 1, this.h, r_rgb, g_rgb, b_rgb, 255);
 				} else {
-					drawSolidRect(this.w - 1, 0, 1, this.h, r_hud, g_hud, b_hud, 255);
+					drawGUIRect(this.w - 1, 0, 1, this.h, r_hud, g_hud, b_hud, 255);
 				}
 
 				offset_x_dock            = 3;
@@ -118,9 +118,9 @@ public class HUDArrayList extends OsirisPlusHUD {
 
 			if (dock_separator.getValBoolean()) {
 				if (isDockIn("LeftUp") || isDockIn("LeftDown")) {
-					drawSolidRect(offset_x_dock_background, position_update_y, getStringWidth(module_name) + offset_x_dock + offset_x_dock_background, getStringHeight(module_name), 0, 0, 0, 100);
+					drawGUIRect(offset_x_dock_background, position_update_y, getStringWidth(module_name) + offset_x_dock + offset_x_dock_background, getStringHeight(module_name), 0, 0, 0, 100);
 				} else if (isDockIn("RightUp") || isDockIn("RightDown")) {
-					drawSolidRect(verifyDocking(getStringWidth(module_name), offset_x_dock_background) - 2, position_update_y, getStringWidth(module_name) + offset_x_dock + 1, getStringHeight(module_name), 0, 0, 0, 100);
+					drawGUIRect(verifyDocking(getStringWidth(module_name), offset_x_dock_background) - 2, position_update_y, getStringWidth(module_name) + offset_x_dock + 1, getStringHeight(module_name), 0, 0, 0, 100);
 				}
 
 				rendering_background = true;
@@ -131,23 +131,23 @@ public class HUDArrayList extends OsirisPlusHUD {
 			if (module_separator.getValBoolean()) {
 				if (isDockIn("LeftUp") || isDockIn("LeftDown")) {
 					if (!rendering_background) {
-						drawSolidRect(offset_x_dock_background, position_update_y, getStringWidth(module_name) + offset_x_dock + offset_x_dock_background, getStringHeight(module_name), 0, 0, 0, 100);
+						drawGUIRect(offset_x_dock_background, position_update_y, getStringWidth(module_name) + offset_x_dock + offset_x_dock_background, getStringHeight(module_name), 0, 0, 0, 100);
 					}
 
 					if (rgb_effect.getValBoolean()) {
-						drawSolidRect(getStringWidth(module_name) + offset_x_dock + 2, position_update_y, 1, getStringHeight(module_name), r_rgb, g_rgb, b_rgb, 255);
+						drawGUIRect(getStringWidth(module_name) + offset_x_dock + 2, position_update_y, 1, getStringHeight(module_name), r_rgb, g_rgb, b_rgb, 255);
 					} else {
-						drawSolidRect(getStringWidth(module_name) + offset_x_dock + 2, position_update_y, 1, getStringHeight(module_name), r_hud, g_hud, b_hud, 255);
+						drawGUIRect(getStringWidth(module_name) + offset_x_dock + 2, position_update_y, 1, getStringHeight(module_name), r_hud, g_hud, b_hud, 255);
 					}
 				} else if (isDockIn("RightUp") || isDockIn("RightDown")) {
 					if (!rendering_background) {
-						drawSolidRect(verifyDocking(getStringWidth(module_name), offset_x_dock_background) - 2, position_update_y, getStringWidth(module_name) + offset_x_dock + 1, getStringHeight(module_name), 0, 0, 0, 100);
+						drawGUIRect(verifyDocking(getStringWidth(module_name), offset_x_dock_background) - 2, position_update_y, getStringWidth(module_name) + offset_x_dock + 1, getStringHeight(module_name), 0, 0, 0, 100);
 					}
 
 					if (rgb_effect.getValBoolean()) {
-						drawSolidRect(verifyDocking(getStringWidth(module_name), offset_x_dock_background) - 3, position_update_y, 1, getStringHeight(module_name), r_rgb, g_rgb, b_rgb, 255);
+						drawGUIRect(verifyDocking(getStringWidth(module_name), offset_x_dock_background) - 3, position_update_y, 1, getStringHeight(module_name), r_rgb, g_rgb, b_rgb, 255);
 					} else {
-						drawSolidRect(verifyDocking(getStringWidth(module_name), offset_x_dock_background) - 3, position_update_y, 1, getStringHeight(module_name), r_hud, g_hud, b_hud, 255);
+						drawGUIRect(verifyDocking(getStringWidth(module_name), offset_x_dock_background) - 3, position_update_y, 1, getStringHeight(module_name), r_hud, g_hud, b_hud, 255);
 					}
 				}
 			}
