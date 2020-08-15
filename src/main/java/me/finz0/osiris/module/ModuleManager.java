@@ -129,6 +129,11 @@ public class ModuleManager {
         addHUD(new HUDGoldenApple());
         addHUD(new HUDExperienceBottle());
         addHUD(new HUDCrystal());
+        addHUD(new HUDPlayer());
+        addHUD(new HUDBps());
+        addHUD(new HUDFPS());
+        addHUD(new HUDServerInfo());
+        addHUD(new HUDPvpInfo());
     }
 
     public static void addMod(Module m){

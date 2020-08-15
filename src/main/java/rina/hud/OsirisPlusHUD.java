@@ -86,6 +86,7 @@ public class OsirisPlusHUD extends Module {
 	public boolean custom_xy;
 	public boolean event_passing;
 	public boolean event_dragging;
+	public boolean event_is_in_editor;
 
 	public OsirisPlusHUD(String name, String description) {
 		super(name, Category.GUI, description);
@@ -156,6 +157,8 @@ public class OsirisPlusHUD extends Module {
 		}
 
 		this.custom_xy = this.setting_custom.getValBoolean();
+
+		this.event_is_in_editor = getModuleByDisplayName("HUDEditor").isEnabled();
 
 		TurokRenderGL.fixScreen(screen_width, screen_height);
 
@@ -315,6 +318,10 @@ public class OsirisPlusHUD extends Module {
 
 	public boolean isDragging() {
 		return this.event_dragging;
+	}
+
+	public boolean isInEditor() {
+		return this.event_is_in_editor;
 	}
 
 	public void click(int x, int y, int mouse) {

@@ -49,6 +49,10 @@ public class HUDCrystal extends OsirisPlusHUD {
 
 			int calculed_width = 16;
 
+			if (isInEditor()) {
+				drawGUIRect(0, 0, this.w, this.h, 0, 0, 0, 100);
+			}
+
 			for (int i = 0; i < 45; i++) {
 				ItemStack stack = mc.player.inventory.getStackInSlot(i);
 				ItemStack off_h = mc.player.getHeldItemOffhand();

@@ -198,6 +198,8 @@ public class OsirisPlusGUI extends GuiScreen {
 
 	@Override
 	public void drawScreen(int x, int y, float partial_ticks) {
+		if (this.mode) this.drawDefaultBackground();
+
 		ScaledResolution scaled_resolution = new ScaledResolution(Minecraft.getMinecraft());
 
 		TurokRenderGL.fixScreen(scaled_resolution.getScaledWidth(), scaled_resolution.getScaledHeight());

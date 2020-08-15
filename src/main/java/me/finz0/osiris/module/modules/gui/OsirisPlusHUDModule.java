@@ -25,10 +25,10 @@ import rina.util.TurokString;
  *
  **/
 public class OsirisPlusHUDModule extends Module {
-	ArrayList<OsirisPlusHUD> HUD_DOCK_LEFT_UP;
-	ArrayList<OsirisPlusHUD> HUD_DOCK_LEFT_DOWN;
-	ArrayList<OsirisPlusHUD> HUD_DOCK_RIGHT_UP;
-	ArrayList<OsirisPlusHUD> HUD_DOCK_RIGHT_DOWN;
+	public ArrayList<OsirisPlusHUD> HUD_DOCK_LEFT_UP;
+	public ArrayList<OsirisPlusHUD> HUD_DOCK_LEFT_DOWN;
+	public ArrayList<OsirisPlusHUD> HUD_DOCK_RIGHT_UP;
+	public ArrayList<OsirisPlusHUD> HUD_DOCK_RIGHT_DOWN;
 
 	// New event.
 	int off_set_chat = 0;

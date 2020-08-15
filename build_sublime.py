@@ -18,4 +18,4 @@ class BUILD:
 		import sys
 		sys.exit()
 
-BUILD("2.1", "osiris_plus-2.1");
+BUILD("3.0", "osiris_plus-3.0");
