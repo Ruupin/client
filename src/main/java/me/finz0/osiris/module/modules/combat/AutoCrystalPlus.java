@@ -112,7 +112,7 @@ public class AutoCrystalPlus extends Module {
         nodesync = new Setting("AntiDesync", this, true, "AutoCrystalPlusAntiDesync");
         OsirisMod.getInstance().settingsManager.rSetting(nodesync);
 	pauseWhileEating = new Setting("PauseWhileEating", this, true, "AutoCrystalPlusPauseWhileEating");
-        OsirisMod.getInstance().settingsManager.rSetting(nodesync);
+        OsirisMod.getInstance().settingsManager.rSetting(pauseWhileEating);
 
         place = new Setting("Place", this, true, "AutoCrystalPlusPlace");
         OsirisMod.getInstance().settingsManager.rSetting(place);
