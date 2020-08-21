@@ -46,7 +46,7 @@ public class ModuleManager {
         addMod(new BedAura());
         addMod(new BowSpam());
         addMod(new AutoWeb());
-        addMod(new PotionAlert());
+        addMod(new CombatInfo());
         //Player
 		addMod(new AutoReplanish());
         addMod(new Blink());
