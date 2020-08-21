@@ -141,5 +141,4 @@ public class SmartOffhand extends Module {
                 isEmpty(mc.player.getPosition().add(0, 0, -1)) &&
                 isEmpty(mc.player.getPosition());
     }
-
 }

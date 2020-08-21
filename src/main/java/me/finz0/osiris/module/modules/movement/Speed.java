@@ -19,7 +19,6 @@ public class Speed extends Module {
         OsirisMod.getInstance().settingsManager.rSetting(jump = new Setting("Jump", this, true, "StrafeJump"));
     }
 
-
     public void onUpdate(){
 
         boolean boost = Math.abs(mc.player.rotationYawHead - mc.player.rotationYaw) < 90;
@@ -79,5 +78,4 @@ public class Speed extends Module {
             }
         }
     }
-
 }

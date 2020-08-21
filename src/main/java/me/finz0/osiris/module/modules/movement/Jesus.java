@@ -9,5 +9,6 @@ public class Jesus extends Module {
     }
 
     public void onUpdate(){
+        //mc.player.changeName("Jesus Fucking Christ") - ollie
     }
 }

@@ -401,6 +401,4 @@ public class OsirisTessellator extends Tessellator {
         GlStateManager.disableBlend();
         GlStateManager.popMatrix();
     }
-
-
 }

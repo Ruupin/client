@@ -216,5 +216,4 @@ public class Announcer extends Module {
     public void onDisable(){
         OsirisMod.EVENT_BUS.unsubscribe(this);
     }
-
 }

@@ -19,11 +19,16 @@ import org.lwjgl.opengl.GL11;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import rina.hud.OsirisPlusHUD;
+
 public class ModuleManager {
     public static ArrayList<Module> modules;
+    public static ArrayList<OsirisPlusHUD> hud_list;
 
     public ModuleManager(){
-        modules = new ArrayList<>();
+        modules  = new ArrayList<>();
+        hud_list = new ArrayList<>();
+
         //Combat
         addMod(new AutoArmor());
         addMod(new KillAura());
@@ -40,7 +45,7 @@ public class ModuleManager {
         addMod(new SmartOffhand());
         addMod(new BedAura());
         addMod(new BowSpam());
-		addMod(new str2detect());
+		addMod(new Strength2Detect());
 		addMod(new AutoWeb());
         //Player
 		addMod(new AutoReplanish());
@@ -73,6 +78,7 @@ public class ModuleManager {
         addMod(new ClinetTimer());
         addMod(new TotemPopCounter());
         addMod(new BreakTweaks());
+        addMod(new FakePlayer());
         //Chat
         addMod(new VisualRange());
         addMod(new BetterChat());
@@ -105,33 +111,38 @@ public class ModuleManager {
         addMod(new BoxESP());
         addMod(new TabGui());
         addMod(new ShulkerPreview());
-        //GUI
-        addMod(new ModList());
-        addMod(new ClickGuiModule());
-        addMod(new Watermark());
-        addMod(new Totems());
-        addMod(new Crystals());
-        addMod(new Gapples());
-        addMod(new Exp());
-        addMod(new Coords());
-        addMod(new Fps());
-        addMod(new Time());
-        addMod(new Players());
-        addMod(new Tps());
-        addMod(new Ping());
-        addMod(new PvpInfo());
-        addMod(new WelcomerGui());
-        addMod(new Bps());
-        addMod(new PotionEffects());
-        addMod(new NotificationsHud());
-        addMod(new Direction());
-        addMod(new ArmorHUD());
-        addMod(new CurrentHole());
-        //addMod(new CsClickGuiModule());
+        addMod(new CityESP());
+
+        // Gui.
+        addMod(new OsirisPlusGUIModule());
+        addMod(new OsirisPlusHUDModule());
+        addMod(new OsirisPlusHUDEditor());
+
+        // HUD.
+        addHUD(new HUDArrayList());
+        addHUD(new HUDCoordinates());
+        addHUD(new HUDGUIWatermark());
+        addHUD(new HUDWatermark());
+        addHUD(new HUDInventory());
+        addHUD(new HUDArmor());
+        addHUD(new HUDTotem());
+        addHUD(new HUDGoldenApple());
+        addHUD(new HUDExperienceBottle());
+        addHUD(new HUDCrystal());
+        addHUD(new HUDPlayer());
+        addHUD(new HUDBps());
+        addHUD(new HUDFPS());
+        addHUD(new HUDServerInfo());
+        addHUD(new HUDPvpInfo());
     }
 
     public static void addMod(Module m){
         modules.add(m);
+    }
+
+    public static void addHUD(OsirisPlusHUD hud){
+        modules.add((Module) hud);
+        hud_list.add(hud);
     }
 
     public static void onUpdate() {
@@ -188,6 +199,10 @@ public class ModuleManager {
         return modules;
     }
 
+    public static ArrayList<OsirisPlusHUD> getHUDList() {
+        return hud_list;
+    }
+
     public static ArrayList<Module> getModulesInCategory(Module.Category c){
         ArrayList<Module> list = (ArrayList<Module>) getModules().stream().filter(m -> m.getCategory().equals(c)).collect(Collectors.toList());
         return list;
@@ -202,6 +217,20 @@ public class ModuleManager {
         });
     }
 
+    public static OsirisPlusHUD getHUDByName(String name) {
+        OsirisPlusHUD hud_requested = null;
+
+        for (OsirisPlusHUD huds : getHUDList()) {
+            if (huds.getName().equals(name)) {
+                hud_requested = huds;
+
+                break;
+            }
+        }
+
+        return hud_requested;
+    }
+
     public static Module getModuleByName(String name){
         Module m = getModules().stream().filter(mm->mm.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
         return m;
@@ -211,9 +240,7 @@ public class ModuleManager {
         Module m = getModules().stream().filter(mm->mm.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
         return m.isEnabled();
     }
-
     public static boolean isModuleEnabled(Module m){
         return m.isEnabled();
     }
-
 }

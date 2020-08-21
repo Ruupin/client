@@ -66,7 +66,6 @@ public class TotemPopCounter extends Module {
         });
     }
 
-
     @Override
     public void onUpdate() {
         if (!this.isDead && 0.0f >= mc.player.getHealth()) {
@@ -100,7 +99,6 @@ public class TotemPopCounter extends Module {
             extraText = "";
             name = "I";
         }
-
         return extraText + ChatFormatting.RED + name + TextFormatting.RESET;
     }
 
@@ -110,7 +108,6 @@ public class TotemPopCounter extends Module {
             extraText = "";
             name = "I";
         }
-
         return extraText + ChatFormatting.GREEN + name + TextFormatting.RESET;
     }
 
@@ -125,8 +122,6 @@ public class TotemPopCounter extends Module {
 
         return "";
     }
-
-
 
     private String formatNumber(final int message) {
         {

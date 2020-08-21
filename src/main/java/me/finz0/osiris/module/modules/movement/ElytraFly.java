@@ -45,5 +45,4 @@ public class ElytraFly extends Module {
         if (!mc.player.capabilities.isCreativeMode)
             mc.player.capabilities.allowFlying = false;
     }
-
 }

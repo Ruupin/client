@@ -1,5 +1,6 @@
 package me.finz0.osiris.command.commands;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.finz0.osiris.command.Command;
 import me.finz0.osiris.module.ModuleManager;
 import org.lwjgl.input.Keyboard;
@@ -12,7 +13,7 @@ public class BindCommand extends Command {
 
     @Override
     public String getSyntax() {
-        return "bind <Module> <Key>";
+        return ChatFormatting.RED + "Usage: " + ChatFormatting.WHITE + Command.prefix + "bind <module> <key>";
     }
 
     @Override
@@ -21,7 +22,7 @@ public class BindCommand extends Command {
         ModuleManager.getModules().forEach(m ->{
             if(args[0].equalsIgnoreCase(m.getName())){
                 m.setBind(key);
-                Command.sendClientMessage(args[0] + " bound to " + args[1].toUpperCase());
+                Command.sendClientMessage(ChatFormatting.AQUA + args[0] + ChatFormatting.WHITE + " is now bound to " + ChatFormatting.RED + args[1].toUpperCase());
             }
         });
     }

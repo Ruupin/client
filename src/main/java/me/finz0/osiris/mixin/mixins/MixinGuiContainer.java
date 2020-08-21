@@ -21,5 +21,4 @@ public class MixinGuiContainer {
         ShulkerPreview.guiLeft = this.guiLeft;
         ShulkerPreview.guiTop = this.guiTop;
     }
-
 }

@@ -22,11 +22,11 @@ public class AutoArmor extends Module {
         OsirisMod.getInstance().settingsManager.rSetting(delay = new Setting("Delay", this, 50.0, 0.0, 1000.0, true, "delay"));
         OsirisMod.getInstance().settingsManager.rSetting(curse = new Setting("NoCurse", this, false, "curse"));
 	}
+
 	Setting delay;
 	Setting curse;
 	private Timer timer = new Timer();
 
-    
     public void onUpdate() {
         final Minecraft mc = Minecraft.getMinecraft();
         if (mc.currentScreen instanceof GuiInventory) {
@@ -105,8 +105,6 @@ public class AutoArmor extends Module {
                 }
             }
         }
-
         return slot;
     }
-
 }

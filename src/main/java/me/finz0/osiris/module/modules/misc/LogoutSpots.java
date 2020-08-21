@@ -135,7 +135,6 @@ public class LogoutSpots extends Module {
         GlStateManager.rotate(-viewerYaw, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate((float) (isThirdPersonFrontal ? -1 : 1) * viewerPitch, 1.0F, 0.0F, 0.0F);
 
-
         GlStateManager.scale(m, m, m);
 
         FontRenderer fontRendererIn = mc.fontRenderer;
@@ -176,5 +175,4 @@ public class LogoutSpots extends Module {
     public static Vec3d getInterpolatedAmount(Entity entity, double ticks) {
         return getInterpolatedAmount(entity, ticks, ticks, ticks);
     }
-
 }

@@ -1,5 +1,6 @@
 package me.finz0.osiris.command.commands;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.finz0.osiris.command.Command;
 import me.finz0.osiris.command.CommandManager;
 import me.finz0.osiris.module.Module;
@@ -18,14 +19,14 @@ public class CmdsCommand extends Command {
 
     @Override
     public String getSyntax() {
-        return "commands";
+        return ChatFormatting.RED + "Usage: " + ChatFormatting.WHITE + Command.prefix + "commands";
     }
 
     @Override
     public void onCommand(String command, String[] args) throws Exception {
         final int size = CommandManager.getCommands().size();
 
-        final TextComponentString msg = new TextComponentString("\2477Commands: ");
+        final TextComponentString msg = new TextComponentString("\247cCommands: ");
 
         for (int i = 0; i < size; i++) {
             final Command c = CommandManager.getCommands().get(i);
@@ -35,7 +36,6 @@ public class CmdsCommand extends Command {
                                 .setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString(c.getSyntax())))));
             }
         }
-
         Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(msg);
     }
 }

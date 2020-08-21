@@ -15,5 +15,4 @@ public class TotemPopEvent extends OsirisEvent {
     public Entity getEntity() {
         return entity;
     }
-
 }

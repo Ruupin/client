@@ -1,9 +1,6 @@
 package me.finz0.osiris;
 
-import de.Hero.clickgui.ClickGUI;
 import me.finz0.osiris.enemy.Enemies;
-import me.finz0.osiris.gui.csgui.CsClickGUI;
-import me.finz0.osiris.gui.hud.HudComponentManager;
 import me.finz0.osiris.settings.SettingsManager;
 import me.finz0.osiris.command.CommandManager;
 import me.finz0.osiris.event.EventProcessor;
@@ -25,6 +22,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
 
+// Rina.
+import rina.module.OsirisPlusGUI;
+
 import java.awt.*;
 // ching chong
 
@@ -32,11 +32,10 @@ import java.awt.*;
 public class OsirisMod {
     public static final String MODID = "osirisplus";
     public static String MODNAME = "Osiris+";
-    public static final String MODVER = "2.0";
+    public static final String MODVER = "3.0";
     public static final String FORGENAME = "Osiris+";
 
     public static final Logger log = LogManager.getLogger(MODNAME);
-    public ClickGUI clickGui;
     public SettingsManager settingsManager;
     public Friends friends;
     public ModuleManager moduleManager;
@@ -47,9 +46,11 @@ public class OsirisMod {
     public WaypointManager waypointManager;
     public static CFontRenderer fontRenderer;
     public Enemies enemies;
-    public CsClickGUI csGui;
 
     public static final EventBus EVENT_BUS = new EventManager();
+
+    // Rina:Gui;
+    public static OsirisPlusGUI guiscreen_modules;
 
     @Mod.Instance
     private static OsirisMod INSTANCE;
@@ -81,9 +82,7 @@ public class OsirisMod {
         moduleManager = new ModuleManager();
         log.info("Modules initialized!");
 
-        clickGui = new ClickGUI();
-        HudComponentManager hudComponentManager = new HudComponentManager(0, 0, clickGui);
-        csGui = new CsClickGUI();
+        guiscreen_modules = new OsirisPlusGUI();
         log.info("ClickGUI initialized!");
 
         macroManager = new MacroManager();
@@ -117,5 +116,4 @@ public class OsirisMod {
     public static OsirisMod getInstance(){
         return INSTANCE;
     }
-
 }

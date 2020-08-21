@@ -27,6 +27,7 @@ import net.minecraft.item.ItemAppleGold;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
+import net.minecraft.item.ItemFood;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.network.play.client.CPacketPlayerTryUseItemOnBlock;
@@ -48,7 +49,7 @@ import java.util.stream.Collectors;
 //kami skid
 public class AutoCrystalPlus extends Module {
     public AutoCrystalPlus() {
-        super("AutoCrystalPlus", Category.COMBAT);
+        super("AutoCrystalPlus", Category.COMBAT, "Osiris but better lol");
     }
 
     private BlockPos render;
@@ -65,12 +66,13 @@ public class AutoCrystalPlus extends Module {
 
   //  Setting explode; fucking pointless why would you want this shit
     Setting waitTick;
-	Setting placeSpeed;
+    Setting placeSpeed;
     Setting range;
     Setting walls;
     Setting antiWeakness;
     Setting nodesync;
     Setting place;
+    Setting endCrystalMe;	
     Setting enemyDistance;
     Setting autoSwitch;
     Setting placeRange;
@@ -78,6 +80,7 @@ public class AutoCrystalPlus extends Module {
     Setting facePlace;
   //  Setting raytrace; also should be on  by default idk why there is an option
     Setting rotate;
+    Setting pauseWhileEating;
     Setting antiStuck;
     Setting spoofRotations;
     Setting chat;
@@ -108,9 +111,13 @@ public class AutoCrystalPlus extends Module {
         OsirisMod.getInstance().settingsManager.rSetting(antiWeakness);
         nodesync = new Setting("AntiDesync", this, true, "AutoCrystalPlusAntiDesync");
         OsirisMod.getInstance().settingsManager.rSetting(nodesync);
+	pauseWhileEating = new Setting("PauseWhileEating", this, true, "AutoCrystalPlusPauseWhileEating");
+        OsirisMod.getInstance().settingsManager.rSetting(pauseWhileEating);
 
         place = new Setting("Place", this, true, "AutoCrystalPlusPlace");
         OsirisMod.getInstance().settingsManager.rSetting(place);
+	endCrystalMe = new Setting("EndCrystalDotMe", this, true, "AutoCrystalPlusEndCrystalMe");
+        OsirisMod.getInstance().settingsManager.rSetting(endCrystalMe);
         autoSwitch = new Setting("AutoSwitch", this, true, "AutoCrystalPlusAutoSwitch");
         OsirisMod.getInstance().settingsManager.rSetting(autoSwitch);
 	antiStuck = new Setting("AntiStuck", this, true, "AutoCrystalPlusAntiStuck");
@@ -159,6 +166,9 @@ public class AutoCrystalPlus extends Module {
         isActive = false;
 		placeSpeedTicks++;
         if(mc.player == null || mc.player.isDead) return; // bruh
+	if(isEatingGap() && pauseWhileEating.getValBoolean()) {
+	    return;	
+	}
         EntityEnderCrystal crystal = mc.world.loadedEntityList.stream()
                 .filter(entity -> entity instanceof EntityEnderCrystal)
                 .filter(e -> mc.player.getDistance(e) <= range.getValDouble())
@@ -401,15 +411,19 @@ public class AutoCrystalPlus extends Module {
         return mc.world.rayTraceBlocks(new Vec3d(mc.player.posX, mc.player.posY + (double)mc.player.getEyeHeight(), mc.player.posZ), new Vec3d(pos.getX(), pos.getY(), pos.getZ()), false, true, false) == null;
     }
 
-    private boolean canPlaceCrystal(BlockPos blockPos) {
+    public boolean canPlaceCrystal(BlockPos blockPos) {
         BlockPos boost = blockPos.add(0, 1, 0);
         BlockPos boost2 = blockPos.add(0, 2, 0);
+	if(!endCrystalMe.getValBoolean()) {
+	    if(mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(boost2)).isEmpty()) {
+		return false;    
+	    }
+	}
         return (mc.world.getBlockState(blockPos).getBlock() == Blocks.BEDROCK
                 || mc.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN)
                 && mc.world.getBlockState(boost).getBlock() == Blocks.AIR
                 && mc.world.getBlockState(boost2).getBlock() == Blocks.AIR
-                && mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(boost)).isEmpty()
-                && mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(boost2)).isEmpty();
+                && mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(boost)).isEmpty();
     }
 
     public static BlockPos getPlayerPos() {
@@ -556,7 +570,6 @@ public class AutoCrystalPlus extends Module {
                 }
             }
         }
-
     });
     @Override
     public void onEnable() {

@@ -49,5 +49,4 @@ public class Timer extends Module {
     public String getHudInfo(){
         return new DecimalFormat("#0.##").format(getMultiplier());
     }
-
 }

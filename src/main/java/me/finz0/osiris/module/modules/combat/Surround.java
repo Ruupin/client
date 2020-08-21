@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 
 public class Surround extends Module {
     public Surround() {
-        super("Surround", Category.COMBAT);
+        super("Surround", Category.COMBAT, "feet no get crystal ok");
     }
     private List<Block> whiteList = Arrays.asList(new Block[] {
             Blocks.OBSIDIAN,

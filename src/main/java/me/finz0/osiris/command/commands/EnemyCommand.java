@@ -14,7 +14,7 @@ public class EnemyCommand extends Command {
 
     @Override
     public String getSyntax() {
-        return "enemy <add | del> <name>";
+        return ChatFormatting.RED + "Usage: " + ChatFormatting.WHITE + Command.prefix + "enemy <add or del> <name>";
     }
 
     @Override
@@ -22,13 +22,13 @@ public class EnemyCommand extends Command {
         if(args[0].equalsIgnoreCase("add")) {
             if (!Enemies.getEnemies().contains(Enemies.getEnemyByName(args[1]))){
                 Enemies.addEnemy(args[1]);
-                sendClientMessage(ChatFormatting.GREEN + "Added enemy with name " + args[1]);
+                sendClientMessage(ChatFormatting.GREEN + "Added" + ChatFormatting.WHITE + " enemy with name " + ChatFormatting.RED + args[1]);
             } else {
-                sendClientMessage(ChatFormatting.DARK_RED + args[1] + " is already an enemy!");
+                sendClientMessage(ChatFormatting.RED + args[1] + ChatFormatting.WHITE + " is already an enemy!");
             }
         } else if(args[0].equalsIgnoreCase("del") || (args[0].equalsIgnoreCase("remove"))){
             Enemies.delEnemy(args[1]);
-            sendClientMessage(ChatFormatting.RED + "Removed enemy with name " + args[1]);
+            sendClientMessage(ChatFormatting.RED + "Removed" + ChatFormatting.WHITE + " enemy with name " + ChatFormatting.RED + args[1]);
         } else {
             sendClientMessage(getSyntax());
         }

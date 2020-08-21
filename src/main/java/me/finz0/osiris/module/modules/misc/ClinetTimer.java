@@ -22,8 +22,6 @@ public class ClinetTimer extends Module {
     Setting tickToFast;
     Setting tickToNoFast;
 
-
-
     public void onDisable() {
         mc.timer.tickLength = 50.0F;
     }
@@ -46,6 +44,4 @@ public class ClinetTimer extends Module {
     public String getHudInfo(){
         return new DecimalFormat("0.##").format(hudInfo);
     }
-
-
 }

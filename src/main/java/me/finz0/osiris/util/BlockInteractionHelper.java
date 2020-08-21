@@ -239,10 +239,7 @@ import net.minecraft.item.ItemStack;
             if (!blockState.getMaterial().isReplaceable()) {
                 return side;
             }
-
         }
-
         return null;
-
     }
 }

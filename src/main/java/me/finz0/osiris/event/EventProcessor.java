@@ -1,9 +1,6 @@
 package me.finz0.osiris.event;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import de.Hero.clickgui.ClickGUI;
-import de.Hero.clickgui.Panel;
-import me.finz0.osiris.gui.hud.HudComponentManager;
 import me.finz0.osiris.OsirisMod;
 import me.finz0.osiris.command.Command;
 import me.finz0.osiris.command.CommandManager;
@@ -15,6 +12,7 @@ import me.finz0.osiris.module.modules.render.ShulkerPreview;
 import me.finz0.osiris.module.modules.render.TabGui;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
+import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
@@ -99,16 +97,19 @@ public class EventProcessor {
 
     @SubscribeEvent
     public void onRender(RenderGameOverlayEvent.Post event) {
-        OsirisMod.EVENT_BUS.post(event);
-        if(event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
+        if (event.isCanceled()) {
+            return;
+        }
+
+        RenderGameOverlayEvent.ElementType target = RenderGameOverlayEvent.ElementType.EXPERIENCE;
+
+        if (!mc.player.isCreative() && mc.player.getRidingEntity() instanceof AbstractHorse) {
+            target = RenderGameOverlayEvent.ElementType.HEALTHMOUNT;
+        }
+
+        if (event.getType() == target) {
             //module onRender
             ModuleManager.onRender();
-            //HudComponent stuff
-            for(Panel p : HudComponentManager.hudComponents){
-                if(p.isHudComponent && p.isHudComponentPinned && p.visible && !(mc.currentScreen instanceof ClickGUI))
-                    p.drawHud();
-            }
-
         }
     }
 
@@ -354,5 +355,4 @@ public class EventProcessor {
         pointY = pointY - j;
         return pointX >= rectX - 1 && pointX < rectX + rectWidth + 1 && pointY >= rectY - 1 && pointY < rectY + rectHeight + 1;
     }
-
 }

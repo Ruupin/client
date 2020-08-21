@@ -13,5 +13,4 @@ public class GuiScreenDisplayedEvent extends OsirisEvent {
     public GuiScreen getScreen(){
         return guiScreen;
     }
-
 }

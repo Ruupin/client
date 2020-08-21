@@ -1,18 +1,15 @@
 package me.finz0.osiris.module.modules.combat;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
+import me.finz0.osiris.OsirisMod;
 import me.finz0.osiris.command.Command;
 import me.finz0.osiris.module.Module;
 import me.finz0.osiris.settings.Setting;
-import me.finz0.osiris.OsirisMod;
-import me.finz0.osiris.module.ModuleManager;
 import me.finz0.osiris.util.BlockInteractionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockObsidian;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -26,14 +23,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameType;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-
+// niggas could not even fucking put make sneak only -CryroByte
 import static me.finz0.osiris.util.BlockInteractionHelper.*;
 
 
@@ -145,7 +139,6 @@ public class AutoFeetPlace extends Module {
         if (announceUsage.getValBoolean()) {
             Command.sendClientMessage("[AutoFeetPlace] " + ChatFormatting.GREEN.toString() + "Enabled!");
         }
-
     }
 
     @Override
@@ -171,12 +164,11 @@ public class AutoFeetPlace extends Module {
         if (announceUsage.getValBoolean()) {
             Command.sendClientMessage("[AutoFeetPlace] " + ChatFormatting.RED.toString() + "Disabled!");
         }
-
     }
 
     @Override
     public void onUpdate() {
-
+        if(sneak.getValBoolean() && !mc.gameSettings.keyBindSneak.isKeyDown()) return;
         if (triggerable.getValBoolean() && totalTicksRunning >= timeoutTicks.getValInt()) {
             totalTicksRunning = 0;
             this.disable();
@@ -208,8 +200,6 @@ public class AutoFeetPlace extends Module {
             Vec3d[] offsetPattern = new Vec3d[0];
             int maxSteps = 0;
 
-
-
              {
                 offsetPattern = Offsets.SURROUND;
                 maxSteps = Offsets.SURROUND.length;
@@ -226,13 +216,10 @@ public class AutoFeetPlace extends Module {
             if (placeBlock(targetPos)) {
                 blocksPlaced++;
             }
-
             offsetStep++;
-
         }
 
         if (blocksPlaced > 0) {
-
             if (lastHotbarSlot != playerHotbarSlot && playerHotbarSlot != -1) {
                 mc.player.inventory.currentItem = playerHotbarSlot;
                 lastHotbarSlot = playerHotbarSlot;
@@ -242,11 +229,8 @@ public class AutoFeetPlace extends Module {
                 mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
                 isSneaking = false;
             }
-
         }
-
         totalTicksRunning++;
-
     }
 
     private boolean placeBlock(BlockPos pos) {
@@ -308,10 +292,7 @@ public class AutoFeetPlace extends Module {
 
         mc.player.connection.sendPacket(new CPacketPlayerDigging(CPacketPlayerDigging.Action.START_DESTROY_BLOCK, neighbour, opposite));
 
-
-
         return true;
-
     }
 
     private int findObiInHotbar() {
@@ -332,11 +313,8 @@ public class AutoFeetPlace extends Module {
                 slot = i;
                 break;
             }
-
         }
-
         return slot;
-
     }
 
     private enum Mode {
@@ -344,7 +322,6 @@ public class AutoFeetPlace extends Module {
     }
 
     private static class Offsets {
-
         private static final Vec3d[] SURROUND = {
                 new Vec3d(1, 0, 0),
                 new Vec3d(0, 0, 1),
@@ -367,7 +344,5 @@ public class AutoFeetPlace extends Module {
                 new Vec3d(0, -1, -1),
                 new Vec3d(0, -1, 0)
         };
-
     }
-
 }

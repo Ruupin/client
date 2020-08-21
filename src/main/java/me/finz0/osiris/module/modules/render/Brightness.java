@@ -15,7 +15,7 @@ public class Brightness extends Module {
 
     public void onUpdate(){
         mc.gameSettings.gammaSetting = 666f;
-    }
+    } //lol devil number XDDD ROFL
 
     public void onDisable(){
         mc.gameSettings.gammaSetting = old;

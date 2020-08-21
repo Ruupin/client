@@ -13,7 +13,7 @@ public class OsirisMixinLoader implements IFMLLoadingPlugin {
     private static boolean isObfuscatedEnvironment = false;
 
     public OsirisMixinLoader() {
-        OsirisMod.log.info("Osiris mixins initialized");
+        OsirisMod.log.info("[Osiris+] Mixins initialized!");
         MixinBootstrap.init();
         Mixins.addConfiguration("mixins.osiris.json");
         MixinEnvironment.getDefaultEnvironment().setObfuscationContext("searge");

@@ -1,11 +1,8 @@
 package me.finz0.osiris.util;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import de.Hero.clickgui.ClickGUI;
-import de.Hero.clickgui.Panel;
 import me.finz0.osiris.enemy.Enemies;
 import me.finz0.osiris.enemy.Enemy;
-import me.finz0.osiris.gui.hud.HudComponentManager;
 import me.finz0.osiris.settings.Setting;
 import me.finz0.osiris.OsirisMod;
 import me.finz0.osiris.command.Command;
@@ -35,6 +32,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 
+// Rina.
+import rina.module.frame.OsirisPlusFrame;
+import rina.module.OsirisPlusGUI;
+import rina.hud.OsirisPlusHUD;
+
 public class ConfigUtils {
     Minecraft mc = Minecraft.getMinecraft();
     public File Osiris;
@@ -57,6 +59,7 @@ public class ConfigUtils {
         loadBinds();
         loadFriends();
         loadGui();
+        loadHudCustom();
         loadPrefix();
         loadRainbow();
         loadMacros();
@@ -65,7 +68,6 @@ public class ConfigUtils {
         loadSpammer();
         loadAnnouncer();
         loadWaypoints();
-        loadHudComponents();
         loadFont();
         loadEnemies();
         loadClientname();
@@ -427,11 +429,11 @@ public class ConfigUtils {
         try {
             File file = new File(this.Osiris.getAbsolutePath(), "Gui.txt");
             BufferedWriter out = new BufferedWriter(new FileWriter(file));
-            Iterator var3 = ClickGUI.panels.iterator();
+            Iterator var3 = OsirisMod.getInstance().guiscreen_modules.getFrames().iterator();
 
             while(var3.hasNext()) {
-                Panel p = (Panel)var3.next();
-                out.write(p.title + ":" + p.x + ":" + p.y + ":" + p.extended);
+                OsirisPlusFrame frame = (OsirisPlusFrame) var3.next();
+                out.write(frame.getRect().getTag() + ":" + frame.getX() + ":" + frame.getY() + ":" + frame.isOpen());
                 out.write("\r\n");
             }
 
@@ -457,12 +459,13 @@ public class ConfigUtils {
                 String e = curLine.split(":")[3];
                 double x1 = Double.parseDouble(x);
                 double y1 = Double.parseDouble(y);
-                boolean ext = Boolean.parseBoolean(e);
-                Panel p = ClickGUI.getPanelByName(name);
-                if (p != null) {
-                    p.x = x1;
-                    p.y = y1;
-                    p.extended = ext;
+                boolean open = Boolean.parseBoolean(e);
+                OsirisPlusFrame frames = OsirisMod.getInstance().guiscreen_modules.getFrameByTag(name);
+
+                if (frames != null) {
+                    frames.setX((int) x1);
+                    frames.setY((int) y1);
+                    frames.setOpenDefault(open);
                 }
             }
 
@@ -474,15 +477,15 @@ public class ConfigUtils {
 
     }
 
-    public void saveHudComponents() {
+    public void saveHudCustom() {
         try {
-            File file = new File(this.Osiris.getAbsolutePath(), "HudComponents.txt");
+            File file = new File(this.Osiris.getAbsolutePath(), "Hud.txt");
             BufferedWriter out = new BufferedWriter(new FileWriter(file));
-            Iterator var3 = HudComponentManager.hudComponents.iterator();
+            Iterator var3 = OsirisMod.getInstance().moduleManager.getHUDList().iterator();
 
             while(var3.hasNext()) {
-                Panel p = (Panel)var3.next();
-                out.write(p.title + ":" + p.x + ":" + p.y + ":" + p.extended + ":" + p.isHudComponentPinned);
+                OsirisPlusHUD hud = (OsirisPlusHUD) var3.next();
+                out.write(hud.getName() + ":" + hud.getX() + ":" + hud.getY() + ":" + hud.isCustom());
                 out.write("\r\n");
             }
 
@@ -492,9 +495,9 @@ public class ConfigUtils {
 
     }
 
-    public void loadHudComponents() {
+    public void loadHudCustom() {
         try {
-            File file = new File(this.Osiris.getAbsolutePath(), "HudComponents.txt");
+            File file = new File(this.Osiris.getAbsolutePath(), "Hud.txt");
             FileInputStream fstream = new FileInputStream(file.getAbsolutePath());
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -505,25 +508,23 @@ public class ConfigUtils {
                 String name = curLine.split(":")[0];
                 String x = curLine.split(":")[1];
                 String y = curLine.split(":")[2];
-                String e = curLine.split(":")[3];
-                String pin = curLine.split(":")[4];
+                String c = curLine.split(":")[3];
                 double x1 = Double.parseDouble(x);
                 double y1 = Double.parseDouble(y);
-                boolean ex = Boolean.parseBoolean(e);
-                boolean pinned = Boolean.parseBoolean(pin);
-                Panel p = HudComponentManager.getHudComponentByName(name);
-                if (p != null) {
-                    p.x = x1;
-                    p.y = y1;
-                    p.extended = ex;
-                    p.isHudComponentPinned = pinned;
+                boolean custom = Boolean.parseBoolean(c);
+                OsirisPlusHUD huds = OsirisMod.getInstance().moduleManager.getHUDByName(name);
+
+                if (huds != null) {
+                    huds.setX((int) x1);
+                    huds.setY((int) y1);
+                    huds.custom_xy = custom;
                 }
             }
 
             br.close();
         } catch (Exception var17) {
             var17.printStackTrace();
-            //this.saveHudComponents();
+            //this.saveGui();
         }
 
     }
@@ -972,6 +973,5 @@ public class ConfigUtils {
             var11.printStackTrace();
             //aveSettingsList();
         }
-
     }
 }
