@@ -275,7 +275,7 @@ public class EventProcessor {
     public void onWorldLoad(WorldEvent.Load event) {
         OsirisMod.EVENT_BUS.post(event);
     }
-
+    
     @EventHandler
     private Listener<PacketEvent.Receive> receiveListener = new Listener<>(event -> {
         if (event.getPacket() instanceof SPacketPlayerListItem) {

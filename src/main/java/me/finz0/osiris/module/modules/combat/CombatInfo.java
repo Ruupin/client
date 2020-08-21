@@ -24,7 +24,7 @@ import net.minecraft.util.text.TextComponentString;
 //NotGhostTypes
 public class CombatInfo extends Module {
     public CombatInfo() {
-        super("CombatInfo", Category.COMBAT, "Customizable alerts for combat info");
+        super("CombatInfo", Category.COMBAT, "Customizable alerts for combat stuff");
     }
 
     private boolean hasAlertedWeak = false;
