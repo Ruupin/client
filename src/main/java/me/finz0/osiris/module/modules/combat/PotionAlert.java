@@ -23,7 +23,7 @@ import net.minecraft.util.text.TextComponentString;
 
 //NotGhostTypes
 public class PotionAlert extends Module {
-    public CombatInfo() {
+    public PotionAlert() {
         super("PotionAlert", Category.COMBAT, "Customizable alerts for potions");
     }
 
