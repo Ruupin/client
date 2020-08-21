@@ -1,6 +1,6 @@
 package me.finz0.osiris;
 
-public class ShutDownProcess extends Thread {
+public class ShutDownHookerino extends Thread {
     @Override
     public void run(){
         saveConfig();
