@@ -45,8 +45,8 @@ public class ModuleManager {
         addMod(new SmartOffhand());
         addMod(new BedAura());
         addMod(new BowSpam());
-		addMod(new Strength2Detect());
-		addMod(new AutoWeb());
+        addMod(new AutoWeb());
+        addMod(new CombatInfo());
         //Player
 		addMod(new AutoReplanish());
         addMod(new Blink());
@@ -55,7 +55,6 @@ public class ModuleManager {
         addMod(new NoSwing());
         addMod(new SpeedMine());
         addMod(new NoInteract());
-        addMod(new WeaknessAlert());
         //Movement
         addMod(new Sprint());
         addMod(new Velocity());
