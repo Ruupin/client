@@ -45,8 +45,8 @@ public class ModuleManager {
         addMod(new SmartOffhand());
         addMod(new BedAura());
         addMod(new BowSpam());
-		addMod(new Strength2Detect());
-		addMod(new AutoWeb());
+        addMod(new AutoWeb());
+        addMod(new CombatInfo());
         //Player
 		addMod(new AutoReplanish());
         addMod(new Blink());
