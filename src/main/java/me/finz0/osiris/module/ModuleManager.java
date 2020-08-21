@@ -44,7 +44,6 @@ public class ModuleManager {
         addMod(new Criticals());
         addMod(new SmartOffhand());
         addMod(new BedAura());
-        addMod(new BowSpam());
         addMod(new AutoWeb());
         addMod(new CombatInfo());
         //Player

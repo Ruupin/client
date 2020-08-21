@@ -21,10 +21,8 @@ public class StorageESP extends Module {
     ConcurrentHashMap<TileEntity, String> chests = new ConcurrentHashMap<>();
 
     public void setup(){
-        a = new Setting("Alpha", this, 150, 0, 255, true, "StorageESPAlpha");
-        OsirisMod.getInstance().settingsManager.rSetting(a);
-        w = new Setting("Width", this, 1, 1, 10, true, "StorageESPWidth");
-        OsirisMod.getInstance().settingsManager.rSetting(w);
+        OsirisMod.getInstance().settingsManager.rSetting(a = new Setting("Alpha", this, 150, 0, 255, true, "StorageESPAlpha"));
+        OsirisMod.getInstance().settingsManager.rSetting(w = new Setting("Width", this, 1, 1, 10, true, "StorageESPWidth"));
     }
 
     public void onUpdate(){

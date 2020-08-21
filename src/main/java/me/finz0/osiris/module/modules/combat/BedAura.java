@@ -1,6 +1,7 @@
 package me.finz0.osiris.module.modules.combat;
 
 import me.finz0.osiris.module.Module;
+import me.finz0.osiris.OsirisMod;
 import me.finz0.osiris.settings.Setting;
 import me.finz0.osiris.util.BlockUtils;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -18,10 +19,10 @@ import java.util.Comparator;
 public class BedAura extends Module {
     public BedAura() {
         super("BedAura", Category.COMBAT, "Right clicks beds");
-        rSetting(range = new Setting("Range", this, 4.5, 0, 10, false, "BedAuraRange"));
-        rSetting(rotate = new Setting("Rotate", this, true, "BedAuraRotate"));
-        rSetting(dimensionCheck = new Setting("DimensionCheck", this, true, "BedAuraDimensionCheck"));
-        rSetting(refill = new Setting("RefillHotbar", this, false, "BedAuraRefillHotbar"));
+        OsirisMod.getInstance().settingsManager.rSetting(range = new Setting("Range", this, 4.5, 0, 10, false, "BedAuraRange"));
+        OsirisMod.getInstance().settingsManager.rSetting(rotate = new Setting("Rotate", this, true, "BedAuraRotate"));
+        OsirisMod.getInstance().settingsManager.rSetting(dimensionCheck = new Setting("DimensionCheck", this, true, "BedAuraDimensionCheck"));
+        OsirisMod.getInstance().settingsManager.rSetting(refill = new Setting("RefillHotbar", this, false, "BedAuraRefillHotbar"));
     }
 
     private Setting range;

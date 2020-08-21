@@ -29,10 +29,8 @@ public class AutoOffhand extends Module {
         modes.add("Totem");
         modes.add("Crystal");
         modes.add("Gapple");
-        mode = new Setting("Mode", this, "Totem", modes, "AutoOffhandMode");
-        OsirisMod.getInstance().settingsManager.rSetting(mode);
-        soft = new Setting("Soft", this, false, "AutoOffhandSoft");
-        OsirisMod.getInstance().settingsManager.rSetting(soft);
+        OsirisMod.getInstance().settingsManager.rSetting(mode = new Setting("Mode", this, "Totem", modes, "AutoOffhandMode"));
+        OsirisMod.getInstance().settingsManager.rSetting(soft = new Setting("Soft", this, false, "AutoOffhandSoft"));
     }
 
     public void onUpdate() {

@@ -18,10 +18,8 @@ public class Timer extends Module {
     Setting multiplier;
 
     public void setup(){
-        tpsSync = new Setting("TpsSync", this, true, "TimerTpsSync");
-        OsirisMod.getInstance().settingsManager.rSetting(tpsSync);
-        multiplier = new Setting("Multiplier", this, 5.0, 0.1, 20.0, false, "TimerMultiplier");
-        OsirisMod.getInstance().settingsManager.rSetting(multiplier);
+        OsirisMod.getInstance().settingsManager.rSetting(tpsSync = new Setting("TpsSync", this, true, "TimerTpsSync"));
+        OsirisMod.getInstance().settingsManager.rSetting(multiplier = new Setting("Multiplier", this, 5.0, 0.1, 20.0, false, "TimerMultiplier"));
     }
 
     public void onUpdate(){

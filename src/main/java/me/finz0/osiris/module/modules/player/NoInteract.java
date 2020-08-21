@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 public class NoInteract extends Module {
     public NoInteract() {
         super("NoInteract", Category.PLAYER, "Prevents opening containers");
-        rSetting(containerOnly = new Setting("ContainerOnly", this, false, "NoIteractContainerOnly"));
+        OsirisMod.getInstance().settingsManager.rSetting(containerOnly = new Setting("ContainerOnly", this, false, "NoIteractContainerOnly"));
     }
 
     private Setting containerOnly;

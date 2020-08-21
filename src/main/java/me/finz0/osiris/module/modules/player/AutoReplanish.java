@@ -22,10 +22,8 @@ public class AutoReplanish extends Module {
     Setting tickDelay;
     private int delayStep = 0;
     public void setup(){
-        tickDelay = new Setting("TickDelay", this, 4, 0, 20, true, "AutoReplenishtickDelay");
-        OsirisMod.getInstance().settingsManager.rSetting(tickDelay);
-        threshold = new Setting("Threshold", this, 4, 0, 20, true, "Threshold2");
-        OsirisMod.getInstance().settingsManager.rSetting(threshold);
+        OsirisMod.getInstance().settingsManager.rSetting(tickDelay = new Setting("TickDelay", this, 4, 0, 20, true, "AutoReplenishtickDelay"));
+        OsirisMod.getInstance().settingsManager.rSetting(threshold = new Setting("Threshold", this, 4, 0, 20, true, "Threshold2"));
     }
 
     /**

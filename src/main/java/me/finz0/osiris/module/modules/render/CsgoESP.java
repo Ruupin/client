@@ -38,7 +38,7 @@ public class CsgoESP extends Module {
         OsirisMod.getInstance().settingsManager.rSetting(items = new Setting("Items", this, false, "CsGoEspItems"));
         OsirisMod.getInstance().settingsManager.rSetting(crystals = new Setting("Crystals", this, false, "CsGoEspCrystals"));
         OsirisMod.getInstance().settingsManager.rSetting(xpBottles = new Setting("XpBottles", this, false, "CsGoEspXpBottles"));
-        rSetting(orbs = new Setting("XpOrbs", this, false, "CsGoEspXpOrbs"));
+        OsirisMod.getInstance().settingsManager.rSetting(orbs = new Setting("XpOrbs", this, false, "CsGoEspXpOrbs"));
     }
 
     public void onWorldRender(RenderEvent event) {
