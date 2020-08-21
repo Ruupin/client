@@ -43,34 +43,22 @@ public class HoleESP extends Module {
     };
 
     public void setup(){
-        rangeS = new Setting("Range", this, 8, 0, 20, true, "HoleEspRange");
-        OsirisMod.getInstance().settingsManager.rSetting(rangeS);
-        r = new Setting("Red", this, 255, 0, 255, true, "HoleEspRed");
-        OsirisMod.getInstance().settingsManager.rSetting(r);
-        g = new Setting("Green", this, 255, 0, 255, true, "HoleEspGreen");
-        OsirisMod.getInstance().settingsManager.rSetting(g);
-        b = new Setting("Blue", this, 255, 0, 255, true, "HoleEspBlue");
-        OsirisMod.getInstance().settingsManager.rSetting(b);
-        a = new Setting("Alpha", this, 50, 0, 255, true, "HoleEspAlpha");
-        OsirisMod.getInstance().settingsManager.rSetting(a);
+        OsirisMod.getInstance().settingsManager.rSetting(rangeS = new Setting("Range", this, 8, 0, 20, true, "HoleEspRange"));
+        OsirisMod.getInstance().settingsManager.rSetting(r = new Setting("Red", this, 255, 0, 255, true, "HoleEspRed"));
+        OsirisMod.getInstance().settingsManager.rSetting(g = new Setting("Green", this, 255, 0, 255, true, "HoleEspGreen"));
+        OsirisMod.getInstance().settingsManager.rSetting(b = new Setting("Blue", this, 255, 0, 255, true, "HoleEspBlue"));
+        OsirisMod.getInstance().settingsManager.rSetting(a = new Setting("Alpha", this, 50, 0, 255, true, "HoleEspAlpha"));
         OsirisMod.getInstance().settingsManager.rSetting(rainbow = new Setting("Rainbow", this, false, "HoleEspRainbow"));
         OsirisMod.getInstance().settingsManager.rSetting(width = new Setting("LineWidth", this, 3, 1, 10, true, "HoleEspLineWidth"));
-
         ArrayList<String> modes = new ArrayList<>();
         modes.add("Box");
         modes.add("Outline");
-
-        mode = new Setting("Mode", this, "Box", modes, "HoleEspMode");
-        OsirisMod.getInstance().settingsManager.rSetting(mode);
-
+        OsirisMod.getInstance().settingsManager.rSetting(mode = new Setting("Mode", this, "Box", modes, "HoleEspMode"));
         ArrayList<String> renderModes = new ArrayList<>();
         renderModes.add("Box");
         renderModes.add("HalfBox");
         renderModes.add("Plane");
-
-        renderMode = new Setting("RenderMode", this, "Box", renderModes, "HoleEspRenderMode");
-        OsirisMod.getInstance().settingsManager.rSetting(renderMode);
-
+        OsirisMod.getInstance().settingsManager.rSetting(renderMode = new Setting("RenderMode", this, "Box", renderModes, "HoleEspRenderMode"));
     }
 
     private ConcurrentHashMap<BlockPos, Boolean> safeHoles;

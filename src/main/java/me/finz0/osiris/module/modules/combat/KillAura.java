@@ -33,10 +33,9 @@ public class KillAura extends Module {
     private Setting rotate;
     private Setting tpsSync;
     public void setup(){
-        range = new Setting("Range", this, 5.0, 0.0, 10.0, false, "KillAuraRange");
-        OsirisMod.getInstance().settingsManager.rSetting(range);
-        rSetting(rotate = new Setting("Rotate", this, true, "KillAuraRotate"));
-        rSetting(tpsSync = new Setting("TpsSync", this, false, "KillAuraTpsSync"));
+        OsirisMod.getInstance().settingsManager.rSetting(range = new Setting("Range", this, 5.0, 0.0, 10.0, false, "KillAuraRange"));
+        OsirisMod.getInstance().settingsManager.rSetting(rotate = new Setting("Rotate", this, true, "KillAuraRotate"));
+        OsirisMod.getInstance().settingsManager.rSetting(tpsSync = new Setting("TpsSync", this, false, "KillAuraTpsSync"));
         OsirisMod.getInstance().settingsManager.rSetting(criticals = new Setting("Criticals", this, false, "KillAuraCriticals"));
         OsirisMod.getInstance().settingsManager.rSetting(swordOnly = new Setting("SwordOnly", this, false, "KillAuraSwordOnly"));
         OsirisMod.getInstance().settingsManager.rSetting(caCheck = new Setting("CrystalAuraCheck", this, false, "KillAuraCaCheck"));

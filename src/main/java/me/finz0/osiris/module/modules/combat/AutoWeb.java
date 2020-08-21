@@ -29,7 +29,6 @@ public class AutoWeb extends Module {
     }
 
     Setting rotate;
-    Setting debugMessages;
     Setting range;
     Setting bpt;
     Setting spoofRotations;
@@ -44,10 +43,8 @@ public class AutoWeb extends Module {
 
     public void setup(){
         OsirisMod.getInstance().settingsManager.rSetting(rotate = new Setting("Rotate", this, true, "AutoWebRotate"));
-        OsirisMod.getInstance().settingsManager.rSetting(debugMessages = new Setting("DebugMessages", this, false, "AutoWebdebugMessages"));
         OsirisMod.getInstance().settingsManager.rSetting(spoofRotations = new Setting("SpoofRotations", this, true, "AutoWebSpoofRotations"));
         OsirisMod.getInstance().settingsManager.rSetting(spoofHotbar = new Setting("SpoofHotbar", this, false, "AutoWebSpoofHotbar"));
-
         OsirisMod.getInstance().settingsManager.rSetting(range = new Setting("Range", this, 5, 0, 10, false, "AutoWebRange"));
         OsirisMod.getInstance().settingsManager.rSetting(bpt = new Setting("BlocksPerTick", this, 8, 1, 15, true, "AutoWebBPT"));
 
@@ -62,9 +59,6 @@ public class AutoWeb extends Module {
             return;
         }
         for (int i = 0; i < (int)Math.floor(((Double)this.bpt.getValDouble())); i++) {
-            if (((Boolean)this.debugMessages.getValBoolean())) {
-                Command.sendClientMessage("[WebAura] Loop iteration: " + this.offsetStep);
-            }
             if (this.offsetStep >= this.offsetList.length) {
                 endLoop();
                 return;
@@ -78,9 +72,6 @@ public class AutoWeb extends Module {
 
     private void placeBlock(BlockPos blockPos) {
         if (!Wrapper.getWorld().getBlockState(blockPos).getMaterial().isReplaceable()) {
-            if (((Boolean)this.debugMessages.getValBoolean())) {
-                Command.sendClientMessage("[WebAura] Block is already placed, skipping");
-            }
             return;
         }
         if (!BlockInteractionHelper.checkForNeighbours(blockPos)) {
@@ -95,16 +86,10 @@ public class AutoWeb extends Module {
             BlockPos neighbor = pos.offset(side);
             EnumFacing side2 = side.getOpposite();
             if (!BlockInteractionHelper.canBeClicked(neighbor)) {
-                if (((Boolean)this.debugMessages.getValBoolean())) {
-                    Command.sendClientMessage("[WebAura] No neighbor to click at!");
-                }
             } else {
 
                 Vec3d hitVec = (new Vec3d(neighbor)).add(0.5D, 0.5D, 0.5D).add((new Vec3d(side2.getDirectionVec())).scale(0.5D));
                 if (eyesPos.squareDistanceTo(hitVec) > 18.0625D) {
-                    if (((Boolean)this.debugMessages.getValBoolean())) {
-                        Command.sendClientMessage("[WebAura] Distance > 4.25 blocks!");
-                    }
                 } else {
 
                     if (((Boolean)this.spoofRotations.getValBoolean())) {
@@ -113,9 +98,6 @@ public class AutoWeb extends Module {
                     boolean needSneak = false;
                     Block blockBelow = mc.world.getBlockState(neighbor).getBlock();
                     if (BlockInteractionHelper.blackList.contains(blockBelow) || BlockInteractionHelper.shulkerList.contains(blockBelow)) {
-                        if (((Boolean)this.debugMessages.getValBoolean())) {
-                            Command.sendClientMessage("[WebAura] Sneak enabled!");
-                        }
                         needSneak = true;
                     }
                     if (needSneak) {
@@ -123,16 +105,11 @@ public class AutoWeb extends Module {
                     }
                     int obiSlot = findObiInHotbar();
                     if (obiSlot == -1) {
-                        if (((Boolean)this.debugMessages.getValBoolean())) {
-                            Command.sendClientMessage("[WebAura] No Obi in Hotbar, disabling!");
-                        }
+                        Command.sendClientMessage("[WebAura] No Webs in Hotbar, disabling!");
                         disable();
                         return;
                     }
                     if (this.lastHotbarSlot != obiSlot) {
-                        if (((Boolean)this.debugMessages.getValBoolean())) {
-                            Command.sendClientMessage("[WebAura] Setting Slot to Obi at  = " + obiSlot);
-                        }
                         if (((Boolean)this.spoofHotbar.getValBoolean())) {
                             mc.player.connection.sendPacket(new CPacketHeldItemChange(obiSlot));
                         } else {
@@ -144,9 +121,6 @@ public class AutoWeb extends Module {
                     mc.playerController.processRightClickBlock(Wrapper.getPlayer(), mc.world, neighbor, side2, hitVec, EnumHand.MAIN_HAND);
                     mc.player.connection.sendPacket(new CPacketAnimation(EnumHand.MAIN_HAND));
                     if (needSneak) {
-                        if (((Boolean)this.debugMessages.getValBoolean())) {
-                            Command.sendClientMessage("[WebAura] Sneak disabled!");
-                        }
                         mc.player.connection.sendPacket(new CPacketEntityAction(mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
                     }
                     return;
@@ -205,19 +179,8 @@ public class AutoWeb extends Module {
 
     private void endLoop() {
         this.offsetStep = 0;
-        if (((Boolean)this.debugMessages.getValBoolean())) {
-            Command.sendClientMessage("[WebAura] Ending Loop");
-        }
         if (this.lastHotbarSlot != this.playerHotbarSlot && this.playerHotbarSlot != -1) {
-            if (((Boolean)this.debugMessages.getValBoolean())) {
-                Command.sendClientMessage("[WebAura] Setting Slot back to  = " + this.playerHotbarSlot);
-            }
-            if (((Boolean)this.debugMessages.getValBoolean())) {
-                mc.player.connection.sendPacket(new CPacketHeldItemChange(this.playerHotbarSlot));
-            } else {
-
-                (Wrapper.getPlayer()).inventory.currentItem = this.playerHotbarSlot;
-            }
+            (Wrapper.getPlayer()).inventory.currentItem = this.playerHotbarSlot;
             this.lastHotbarSlot = this.playerHotbarSlot;
         }
         findTarget();
@@ -232,9 +195,6 @@ public class AutoWeb extends Module {
         }
         this.playerHotbarSlot = (Wrapper.getPlayer()).inventory.currentItem;
         this.lastHotbarSlot = -1;
-        if (((Boolean)this.debugMessages.getValBoolean())) {
-            Command.sendClientMessage("[WebAura] Saving initial Slot  = " + this.playerHotbarSlot);
-        }
         findTarget();
     }
 
@@ -245,9 +205,6 @@ public class AutoWeb extends Module {
             return;
         }
         if (this.lastHotbarSlot != this.playerHotbarSlot && this.playerHotbarSlot != -1) {
-            if (((Boolean)this.debugMessages.getValBoolean())) {
-                Command.sendClientMessage("[WebAura] Setting Slot to  = " + this.playerHotbarSlot);
-            }
             if (((Boolean)this.spoofHotbar.getValBoolean())) {
                 mc.player.connection.sendPacket(new CPacketHeldItemChange(this.playerHotbarSlot));
             } else {

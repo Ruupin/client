@@ -24,7 +24,7 @@ public class BoxESP extends Module {
         OsirisMod.getInstance().settingsManager.rSetting(epearls = new Setting("Epearls", this, false, "BoxEspEpearls"));
         OsirisMod.getInstance().settingsManager.rSetting(crystals = new Setting("Crystals", this, false, "BoxEspCrystals"));
         OsirisMod.getInstance().settingsManager.rSetting(items = new Setting("Items", this, false, "BoxEspItems"));
-        rSetting(orbs = new Setting("XpOrbs", this, false, "BoxEspXpOrbs"));
+        OsirisMod.getInstance().settingsManager.rSetting(orbs = new Setting("XpOrbs", this, false, "BoxEspXpOrbs"));
         OsirisMod.getInstance().settingsManager.rSetting(rainbow = new Setting("Rainbow", this, false, "BoxEspRainbow"));
         OsirisMod.getInstance().settingsManager.rSetting(r = new Setting("Red", this, 255, 1, 255, true, "BoxEspRed"));
         OsirisMod.getInstance().settingsManager.rSetting(g = new Setting("Green", this, 255, 1, 255, true, "BoxEspGreen"));

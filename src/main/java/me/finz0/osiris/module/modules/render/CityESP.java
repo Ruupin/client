@@ -38,14 +38,10 @@ public class CityESP extends Module { //made with THCDeobfuscator :)
     Setting blue;
     Setting alpha;
     public void setup(){
-        red = new Setting("EspRed", this, 200, 0, 255, true, "EspRed");
-        OsirisMod.getInstance().settingsManager.rSetting(red);
-        green = new Setting("EspGreen", this, 50, 0, 255, true, "EspGreen");
-        OsirisMod.getInstance().settingsManager.rSetting(green);
-        blue = new Setting("EspBlue", this, 200, 0, 255, true, "EspBlue");
-        OsirisMod.getInstance().settingsManager.rSetting(blue);
-        alpha = new Setting("EspAlpha", this, 50, 0, 255, true, "EspAlpha");
-        OsirisMod.getInstance().settingsManager.rSetting(alpha);
+        OsirisMod.getInstance().settingsManager.rSetting(red = new Setting("EspRed", this, 200, 0, 255, true, "EspRed"));
+        OsirisMod.getInstance().settingsManager.rSetting(green = new Setting("EspGreen", this, 50, 0, 255, true, "EspGreen"));
+        OsirisMod.getInstance().settingsManager.rSetting(blue = new Setting("EspBlue", this, 200, 0, 255, true, "EspBlue"));
+        OsirisMod.getInstance().settingsManager.rSetting(alpha = new Setting("EspAlpha", this, 50, 0, 255, true, "EspAlpha"));
     }
 
     private final BlockPos[] surroundOffset = new BlockPos[]{new BlockPos(0, 0, -1), new BlockPos(1, 0, 0), new BlockPos(0, 0, 1), new BlockPos(-1, 0, 0)};

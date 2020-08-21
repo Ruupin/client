@@ -19,7 +19,7 @@ public class HitboxESP extends Module {
         OsirisMod.getInstance().settingsManager.rSetting(passive = new Setting("Passive", this, false, "HitBoxEspPassive"));
         OsirisMod.getInstance().settingsManager.rSetting(mobs = new Setting("Mobs", this, false, "HitBoxEspMobs"));
         OsirisMod.getInstance().settingsManager.rSetting(exp = new Setting("XpBottles", this, false, "HitBoxEspXpBottles"));
-        rSetting(orbs = new Setting("XpOrbs", this, false, "HitBoxEspXpOrbs"));
+        OsirisMod.getInstance().settingsManager.rSetting(orbs = new Setting("XpOrbs", this, false, "HitBoxEspXpOrbs"));
         OsirisMod.getInstance().settingsManager.rSetting(epearls = new Setting("Epearls", this, false, "HitBoxEspEpearls"));
         OsirisMod.getInstance().settingsManager.rSetting(crystals = new Setting("Crystals", this, false, "HitBoxEspCrystals"));
         OsirisMod.getInstance().settingsManager.rSetting(items = new Setting("Items", this, false, "HitBoxEspItems"));

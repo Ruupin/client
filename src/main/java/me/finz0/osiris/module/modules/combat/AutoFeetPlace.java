@@ -60,24 +60,15 @@ public class AutoFeetPlace extends Module {
     private Vec3d playerPos;
     private BlockPos basePos;
     public void setup(){
-        timeoutTicks = new Setting("TimeoutTicks", this, 2, 0, 20, true, "SurroundTimeoutTicks");
-        OsirisMod.getInstance().settingsManager.rSetting(timeoutTicks);
-        tickDelay = new Setting("TickDelay", this, 0, 0, 20, true, "SurroundTickDelay");
-        OsirisMod.getInstance().settingsManager.rSetting(tickDelay);
-        blocksPerTick = new Setting("BlocksPerTick", this, 20, 0, 20, true, "SurroundBlocksPerTick");
-        OsirisMod.getInstance().settingsManager.rSetting(blocksPerTick);
-        sneak = new Setting("SneakOnly", this, false, "SurroundSneakOnly");
-        OsirisMod.getInstance().settingsManager.rSetting(sneak);
-        rotate = new Setting("Rotate", this, true, "SurroundRotate");
-        OsirisMod.getInstance().settingsManager.rSetting(rotate);
-        announceUsage = new Setting("AnnounceUsage", this, true, "SurroundAnnounceUsage");
-        OsirisMod.getInstance().settingsManager.rSetting(announceUsage);
-        autoCenter = new Setting("AutoCenter", this, false, "SurroundAutoCenter");
-        OsirisMod.getInstance().settingsManager.rSetting(autoCenter);
-        triggerable = new Setting("Triggerable", this, true, "triggerable");
-        OsirisMod.getInstance().settingsManager.rSetting(triggerable);
-        jumpDisable = new Setting("JumpDisable", this, true, "SurroundJumpDisable");
-        OsirisMod.getInstance().settingsManager.rSetting(jumpDisable);
+        OsirisMod.getInstance().settingsManager.rSetting(timeoutTicks = new Setting("TimeoutTicks", this, 2, 0, 20, true, "SurroundTimeoutTicks"));
+        OsirisMod.getInstance().settingsManager.rSetting(tickDelay = new Setting("TickDelay", this, 0, 0, 20, true, "SurroundTickDelay"));
+        OsirisMod.getInstance().settingsManager.rSetting(blocksPerTick = new Setting("BlocksPerTick", this, 20, 0, 20, true, "SurroundBlocksPerTick"));
+        OsirisMod.getInstance().settingsManager.rSetting(sneak = new Setting("SneakOnly", this, false, "SurroundSneakOnly"));
+        OsirisMod.getInstance().settingsManager.rSetting(rotate = new Setting("Rotate", this, true, "SurroundRotate"));
+        OsirisMod.getInstance().settingsManager.rSetting(announceUsage = new Setting("AnnounceUsage", this, true, "SurroundAnnounceUsage"));
+        OsirisMod.getInstance().settingsManager.rSetting(autoCenter = new Setting("AutoCenter", this, false, "SurroundAutoCenter"));
+        OsirisMod.getInstance().settingsManager.rSetting(triggerable = new Setting("Triggerable", this, true, "triggerable"));
+        OsirisMod.getInstance().settingsManager.rSetting(jumpDisable = new Setting("JumpDisable", this, true, "SurroundJumpDisable"));
 
     }
 
