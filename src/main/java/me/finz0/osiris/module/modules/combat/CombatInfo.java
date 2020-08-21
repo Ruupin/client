@@ -3,23 +3,18 @@ package me.finz0.osiris.module.modules.combat;
 import java.util.Collections;
 import java.util.Set;
 import java.util.WeakHashMap;
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 import me.finz0.osiris.OsirisMod;
 import me.finz0.osiris.module.Module;
-import me.finz0.osiris.module.ModuleManager;
 import me.finz0.osiris.settings.Setting;
 import me.finz0.osiris.command.Command;
-import me.finz0.osiris.util.EntityUtil;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.text.TextComponentString;
 
 //NotGhostTypes
 public class CombatInfo extends Module {

@@ -90,58 +90,34 @@ public class AutoCrystal extends Module {
 
 
     public void setup() {
-        explode = new Setting("Hit", this, true, "AutoCrystalHit");
-        OsirisMod.getInstance().settingsManager.rSetting(explode);
-        waitTick = new Setting("TickDelay", this, 1, 0, 20.0, true, "AutoCrystalTickDelay");
-        OsirisMod.getInstance().settingsManager.rSetting(waitTick);
-        range = new Setting("HitRange", this, 5.0, 0.0, 10.0, false, "AutoCrystalHitRange");
-        OsirisMod.getInstance().settingsManager.rSetting(range);
-        walls = new Setting("WallsRange", this, 3.5, 0.0, 10.0, false, "AutoCrystalWallsRange");
-        OsirisMod.getInstance().settingsManager.rSetting(walls);
-        antiWeakness = new Setting("AntiWeakness", this, true, "AutoCrystalAntiWeakness");
-        OsirisMod.getInstance().settingsManager.rSetting(antiWeakness);
-        nodesync = new Setting("AntiDesync", this, true, "AutoCrystalAntiDesync");
-        OsirisMod.getInstance().settingsManager.rSetting(nodesync);
-
-        place = new Setting("Place", this, true, "AutoCrystalPlace");
-        OsirisMod.getInstance().settingsManager.rSetting(place);
-        autoSwitch = new Setting("AutoSwitch", this, true, "AutoCrystalAutoSwitch");
-        OsirisMod.getInstance().settingsManager.rSetting(autoSwitch);
+        OsirisMod.getInstance().settingsManager.rSetting(explode = new Setting("Hit", this, true, "AutoCrystalHit"));
+        OsirisMod.getInstance().settingsManager.rSetting(waitTick = new Setting("TickDelay", this, 1, 0, 20.0, true, "AutoCrystalTickDelay"));
+        OsirisMod.getInstance().settingsManager.rSetting(range = new Setting("HitRange", this, 5.0, 0.0, 10.0, false, "AutoCrystalHitRange"));
+        OsirisMod.getInstance().settingsManager.rSetting(walls = new Setting("WallsRange", this, 3.5, 0.0, 10.0, false, "AutoCrystalWallsRange"));
+        OsirisMod.getInstance().settingsManager.rSetting(antiWeakness = new Setting("AntiWeakness", this, true, "AutoCrystalAntiWeakness"));
+        OsirisMod.getInstance().settingsManager.rSetting(nodesync = new Setting("AntiDesync", this, true, "AutoCrystalAntiDesync"));
+        OsirisMod.getInstance().settingsManager.rSetting(place = new Setting("Place", this, true, "AutoCrystalPlace"));
+        OsirisMod.getInstance().settingsManager.rSetting(autoSwitch = new Setting("AutoSwitch", this, true, "AutoCrystalAutoSwitch"));
         OsirisMod.getInstance().settingsManager.rSetting(noGappleSwitch = new Setting("NoGapSwitch", this, false, "AutoCrystalNoGapSwitch"));
-        placeRange = new Setting("PlaceRange", this, 5.0, 0.0, 10.0, false, "AutoCrystalPlaceRange");
-        OsirisMod.getInstance().settingsManager.rSetting(placeRange);
-        minDmg = new Setting("MinDamage", this, 5.0, 0.0, 40.0, false, "AutoCrystalMinDamage");
-        OsirisMod.getInstance().settingsManager.rSetting(minDmg);
-        facePlace = new Setting("FaceplaceHP", this, 6.0, 0.0, 40.0, false, "AutoCrystalFaceplaceHP");
-        OsirisMod.getInstance().settingsManager.rSetting(facePlace);
-        raytrace = new Setting("Raytrace", this, false, "AutoCrystalRaytrace");
-        OsirisMod.getInstance().settingsManager.rSetting(raytrace);
-        rotate = new Setting("Rotate", this, true, "AutoCrystalRotate");
-        OsirisMod.getInstance().settingsManager.rSetting(rotate);
-        spoofRotations = new Setting("SpoofAngles", this, true, "AutoCrystalSpoofAngles");
-        OsirisMod.getInstance().settingsManager.rSetting(spoofRotations);
+        OsirisMod.getInstance().settingsManager.rSetting(placeRange = new Setting("PlaceRange", this, 5.0, 0.0, 10.0, false, "AutoCrystalPlaceRange"));
+        OsirisMod.getInstance().settingsManager.rSetting(minDmg = new Setting("MinDamage", this, 5.0, 0.0, 40.0, false, "AutoCrystalMinDamage"));
+        OsirisMod.getInstance().settingsManager.rSetting(facePlace = new Setting("FaceplaceHP", this, 6.0, 0.0, 40.0, false, "AutoCrystalFaceplaceHP"));
+        OsirisMod.getInstance().settingsManager.rSetting(raytrace = new Setting("Raytrace", this, false, "AutoCrystalRaytrace"));
+        OsirisMod.getInstance().settingsManager.rSetting(rotate = new Setting("Rotate", this, true, "AutoCrystalRotate"));
+        OsirisMod.getInstance().settingsManager.rSetting(spoofRotations = new Setting("SpoofAngles", this, true, "AutoCrystalSpoofAngles"));
         OsirisMod.getInstance().settingsManager.rSetting(maxSelfDmg = new Setting("MaxSelfDmg", this, 10, 0, 36, false, "AutoCrystalMaxSelfDamage"));
-        chat = new Setting("ToggleMsgs", this, true, "AutoCrystalToggleMessages");
-        OsirisMod.getInstance().settingsManager.rSetting(chat);
+        OsirisMod.getInstance().settingsManager.rSetting(chat = new Setting("ToggleMsgs", this, true, "AutoCrystalToggleMessages"));
 
-        rainbow = new Setting("EspRainbow", this, false, "AutoCrystalEspRainbow");
-        OsirisMod.getInstance().settingsManager.rSetting(rainbow);
-        espR = new Setting("EspRed", this, 200, 0, 255, true, "AutoCrystalEspRed");
-        OsirisMod.getInstance().settingsManager.rSetting(espR);
-        espG = new Setting("EspGreen", this, 50, 0, 255, true, "AutoCrystalEspGreen");
-        OsirisMod.getInstance().settingsManager.rSetting(espG);
-        espB = new Setting("EspBlue", this, 200, 0, 255, true, "AutoCrystalEspBlue");
-        OsirisMod.getInstance().settingsManager.rSetting(espB);
-        espA = new Setting("EspAlpha", this, 50, 0, 255, true, "AutoCrystalEspAlpha");
-        OsirisMod.getInstance().settingsManager.rSetting(espA);
-
+        OsirisMod.getInstance().settingsManager.rSetting(rainbow = new Setting("EspRainbow", this, false, "AutoCrystalEspRainbow"));
+        OsirisMod.getInstance().settingsManager.rSetting(espR = new Setting("EspRed", this, 200, 0, 255, true, "AutoCrystalEspRed"));
+        OsirisMod.getInstance().settingsManager.rSetting(espG = new Setting("EspGreen", this, 50, 0, 255, true, "AutoCrystalEspGreen"));
+        OsirisMod.getInstance().settingsManager.rSetting(espB = new Setting("EspBlue", this, 200, 0, 255, true, "AutoCrystalEspBlue"));
+        OsirisMod.getInstance().settingsManager.rSetting(espA = new Setting("EspAlpha", this, 50, 0, 255, true, "AutoCrystalEspAlpha"));
         ArrayList<String> renderModes = new ArrayList<>();
         renderModes.add("Box");
         renderModes.add("HalfBox");
         renderModes.add("Plane");
-
-        renderMode = new Setting("EspRenderMode", this, "Box", renderModes, "AutoCrystalEspRenderMode");
-        OsirisMod.getInstance().settingsManager.rSetting(renderMode);
+        OsirisMod.getInstance().settingsManager.rSetting(renderMode = new Setting("EspRenderMode", this, "Box", renderModes, "AutoCrystalEspRenderMode"));
 
     }
 
