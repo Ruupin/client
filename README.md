@@ -14,7 +14,7 @@ a brain
 ### Windows
 
 First, open cmd. Run `cd "<insert path to directory where you downloaded the source code>"`. 
-Next, run `gradlew.bat setupDecompWorkspace`, and then run `gradlew.bat build`. 
+Next, run `gradlew setupDecompWorkspace`, and then run `gradlew.bat build`. 
 
 You can also run `blablabla.bat` and `autobuild.bat` in that order.
 
