@@ -22,9 +22,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentString;
 
 //NotGhostTypes
-public class CombatInfo extends Module {
+public class PotionAlert extends Module {
     public CombatInfo() {
-        super("CombatInfo", Category.COMBAT, "Customizable alerts for combat info");
+        super("PotionAlert", Category.COMBAT, "Customizable alerts for potions");
     }
 
     private boolean hasAlertedWeak = false;
