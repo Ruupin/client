@@ -55,7 +55,6 @@ public class ModuleManager {
         addMod(new NoSwing());
         addMod(new SpeedMine());
         addMod(new NoInteract());
-        addMod(new WeaknessAlert());
         //Movement
         addMod(new Sprint());
         addMod(new Velocity());
