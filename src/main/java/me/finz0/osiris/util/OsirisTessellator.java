@@ -1,14 +1,17 @@
 package me.finz0.osiris.util;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 
+import static me.finz0.osiris.util.Wrapper.mc;
 import static org.lwjgl.opengl.GL11.*;
 
 //Credit 086
@@ -161,6 +164,24 @@ public class OsirisTessellator extends Tessellator {
             buffer.pos(x+w, y+h, z).color(r, g, b, a).endVertex();
             buffer.pos(x+w, y+h, z+d).color(r, g, b, a).endVertex();
         }
+    }
+
+    public static void glBillboard(double x, double y, double z) {
+        float scale = 0.02666667F;
+        GlStateManager.translate(x - (mc.getRenderManager()).renderPosX, y - (mc.getRenderManager()).renderPosY, z - (mc.getRenderManager()).renderPosZ);
+        GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(-(mc.player.rotationYaw), 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate((mc.player.rotationPitch), (mc.gameSettings.thirdPersonView == 2) ? -1.0F : 1.0F, 0.0F, 0.0F);
+        GlStateManager.scale(-scale, -scale, scale);
+    }
+
+    public static void glBillboardDistanceScaled(double x, double y, double z, EntityPlayer player, float scale) {
+        glBillboard(x, y, z);
+        int distance = (int)player.getDistance(x, y, z);
+        float scaleDistance = distance / 2.0F / (2.0F + 2.0F - scale);
+        if (scaleDistance < 1.0F)
+            scaleDistance = 1.0F;
+        GlStateManager.scale(scaleDistance, scaleDistance, scaleDistance);
     }
 
     public static void drawBox(BufferBuilder buffer, AxisAlignedBB bb, int r, int g, int b, int a, int sides) {

@@ -10,10 +10,12 @@ import me.finz0.osiris.module.ModuleManager;
 import me.finz0.osiris.module.modules.chat.AutoGG;
 import me.finz0.osiris.util.GeometryMasks;
 import me.finz0.osiris.util.OsirisTessellator;
+import me.finz0.osiris.util.Pair;
 import me.finz0.osiris.util.Rainbow;
 import me.finz0.osiris.friends.Friends;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -93,6 +95,10 @@ public class AutoCrystalPlus extends Module {
     Setting noGappleSwitch;
     Setting renderMode;
 
+    Setting preventSelfCrystal;
+    Setting renderDamage;
+    Setting renderAllDamage;
+
     public boolean isActive = false;
 
 
@@ -160,21 +166,39 @@ public class AutoCrystalPlus extends Module {
         renderMode = new Setting("EspRenderMode", this, "Box", renderModes, "AutoCrystalPluslEspRenderMode");
         OsirisMod.getInstance().settingsManager.rSetting(renderMode);
 
+        OsirisMod.getInstance().settingsManager.rSetting(preventSelfCrystal = new Setting("PreventSelfCrystal", this, true, "AutoCrystalPreventSelf"));
+        OsirisMod.getInstance().settingsManager.rSetting(renderDamage = new Setting("RenderDamage", this, true, "AutoCrystalRenderDamage"));
+        OsirisMod.getInstance().settingsManager.rSetting(renderAllDamage = new Setting("RenderAllDamage", this, true, "AutoCrystalRenderAllDamage"));
     }
 
     public void onUpdate() {
         isActive = false;
 		placeSpeedTicks++;
         if(mc.player == null || mc.player.isDead) return; // bruh
-	if(isEatingGap() && pauseWhileEating.getValBoolean()) {
-	    return;	
-	}
+        if(isEatingGap() && pauseWhileEating.getValBoolean()) {
+            return;
+        }
         EntityEnderCrystal crystal = mc.world.loadedEntityList.stream()
                 .filter(entity -> entity instanceof EntityEnderCrystal)
                 .filter(e -> mc.player.getDistance(e) <= range.getValDouble())
                 .map(entity -> (EntityEnderCrystal) entity)
                 .min(Comparator.comparing(c -> mc.player.getDistance(c)))
                 .orElse(null);
+
+        extraRenderList.clear(); // clear extra render list
+
+        if (renderAllDamage.getValBoolean()) {
+            Color transparent = new Color(0,0,0,0);
+            mc.world.loadedEntityList.stream()
+                    .filter(entity -> entity instanceof EntityEnderCrystal)
+                    .filter(e -> mc.player.getDistance(e) <= range.getValDouble())
+                    .map(entity -> (EntityEnderCrystal) entity)
+                    .forEach(entityEnderCrystal -> {
+                        if (entityEnderCrystal.entityId != crystal.entityId)
+                            extraRenderList.add(new Pair<>(entityEnderCrystal.getPosition().subtract(new Vec3i(0.5, 1, 0.5)), transparent));
+                    });
+        }
+
         if ( /* explode.getValBoolean() && */ crystal != null) {
 			antiStuckTicks++;
             if (!mc.player.canEntityBeSeen(crystal) && mc.player.getDistance(crystal) > walls.getValDouble()) return;
@@ -218,11 +242,31 @@ public class AutoCrystalPlus extends Module {
             }
 
             isActive = true;
+
+            Color crystalAboveMaxDmgCol = new Color(255,0,0,70);
+            if (calculateDamage(crystal,mc.player) <= maxSelfDmg.getValInt() || !preventSelfCrystal.getValBoolean()) { // stop it from killing ourselves, unless preventSelfCrystal is false
                 if (rotate.getValBoolean()) {
                     lookAtPacket(crystal.posX, crystal.posY, crystal.posZ, mc.player);
                 }
                 mc.playerController.attackEntity(mc.player, crystal);
                 mc.player.swingArm(EnumHand.MAIN_HAND);
+            } else if (calculateDamage(crystal,mc.player) > maxSelfDmg.getValInt() && preventSelfCrystal.getValBoolean()) {
+                if (!extraRenderList.contains(new Pair<>(crystal.getPosition().subtract(new Vec3i(0.5,1,0.5)), crystalAboveMaxDmgCol))) {
+                    extraRenderList.add(new Pair<>(crystal.getPosition().subtract(new Vec3i(0.5, 1, 0.5)), crystalAboveMaxDmgCol));
+                }
+            }
+
+            if (preventSelfCrystal.getValBoolean()) {
+                mc.world.loadedEntityList.stream()
+                        .filter(entity -> entity instanceof EntityEnderCrystal)
+                        .filter(e -> mc.player.getDistance(e) <= range.getValDouble())
+                        .filter(e -> calculateDamage((EntityEnderCrystal) e, mc.player) > maxSelfDmg.getValInt())
+                        .map(entity -> (EntityEnderCrystal) entity)
+                        .forEach(entityEnderCrystal -> {
+                            extraRenderList.add(new Pair<>(entityEnderCrystal.getPosition().subtract(new Vec3i(0.5, 1, 0.5)), crystalAboveMaxDmgCol));
+                        });
+            }
+
             isActive = false;
 			if(antiStuck.getValBoolean()) {
 				if(antiStuckTicks < 40) { // number of ticks you have to be stuck for until AntiStuck starts placing more crystals
@@ -373,11 +417,13 @@ public class AutoCrystalPlus extends Module {
         }
     }
 
+    List<Pair<BlockPos,Color>> extraRenderList = new ArrayList<>();
 
     public void onWorldRender(RenderEvent event) {
         Color color = Rainbow.getColor();
         Color c = new Color(color.getRed(), color.getGreen(), color.getBlue(), (int)espA.getValDouble());
-        if (render != null && mc.player != null) {
+        if (mc.player==null) return;
+        if (render != null) {
             OsirisTessellator.prepare(GL11.GL_QUADS);
             if(rainbow.getValBoolean()) {
                 drawCurrentBlock(render, c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
@@ -385,6 +431,25 @@ public class AutoCrystalPlus extends Module {
                 drawCurrentBlock(render, espR.getValInt(), espG.getValInt(), espB.getValInt(), espA.getValInt());
             }
             OsirisTessellator.release();
+        }
+
+        if (extraRenderList.size()>0) {
+            for (Pair<BlockPos, Color> toRender : extraRenderList) {
+                if (toRender.getKey() == render) continue;
+                OsirisTessellator.prepare(GL11.GL_QUADS);
+                drawCurrentBlock(toRender.getKey(), toRender.getValue().getRed(), toRender.getValue().getGreen(), toRender.getValue().getBlue(), toRender.getValue().getAlpha());
+                OsirisTessellator.release();
+                if (renderDamage.getValBoolean()) {
+                    GlStateManager.pushMatrix();
+                    OsirisTessellator.glBillboardDistanceScaled(toRender.getKey().getX()+.5, toRender.getKey().getY()+1, toRender.getKey().getZ()+.5, mc.player, 1.0F);
+                    double d = calculateDamage(toRender.getKey().getX()+.5, toRender.getKey().getY()+1, toRender.getKey().getZ()+.5, mc.player);
+                    String damageText = ((Math.floor(d) == d) ? Integer.valueOf((int)d).toString() : String.format("%.1f", d)) + "";
+                    GlStateManager.disableDepth();
+                    GlStateManager.translate(-(mc.fontRenderer.getStringWidth(damageText) / 2.0D), 0.0D, 0.0D);
+                    mc.fontRenderer.drawStringWithShadow(damageText, 0.0F, 0.0F, -1);
+                    GlStateManager.popMatrix();
+                }
+            }
         }
     }
 
